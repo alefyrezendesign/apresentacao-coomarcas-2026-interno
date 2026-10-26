@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { slidesData } from './data/slidesData';
 import SlideRenderer from './slides/SlideRenderer';
 import AmbientParticles from './components/AmbientParticles';
-import BackgroundManager, { getSlideBackgroundVideo } from './components/BackgroundManager';
 import HudControls from './components/HudControls';
 import OverviewModal from './components/OverviewModal';
 import ShortcutsModal from './components/ShortcutsModal';
@@ -11,7 +10,7 @@ import { playTickSound, isSoundEnabled, setSoundEnabled } from './utils/sound';
 
 function IntroScreen({ onStart }) {
   return (
-    <section className="intro-screen" aria-label="Iniciar apresentação Grupo Coomarcas">
+    <section className="intro-screen" aria-label="Tela inicial da apresentação">
       <div className="intro-brand">
         <img className="intro-logo" src="/assets/logo_coomarcas-branca.png" alt="Grupo Coomarcas" />
         <div className="intro-play-wrap">
@@ -35,6 +34,82 @@ function PresentationChrome({ isLight, page, showMark = true }) {
   );
 }
 
+const lightBackgroundVideos = [
+  '/videos/bg-vd-branco.mp4',
+  '/videos/bg-vd-branco-2.mp4',
+  '/videos/bg-vd-branco-3.mp4',
+];
+
+export function getSlideBackgroundVideo(slide) {
+  if (!slide) return null;
+  // Slide 2, 4, 5, 8, 9: Vídeo de líquido escuro
+  if ([2, 4, 5, 8, 9].includes(slide.id)) return '/videos/bg-vd-liquid-escuro.mp4';
+  // Slide 1 (Capa) e Slide 6 (Organograma): Vídeo escuro institucional
+  if (slide.id === 1 || slide.id === 6) return '/videos/bg-vd-escuro.mp4';
+  // Slide 7 (Marcas) e Slide 16 (Evidência): Vídeo de partículas/pontos escuros
+  if ([7, 16].includes(slide.id)) return '/videos/bg-vd-escuro-pontos.mp4';
+  // Slide 10: Vídeo azul da jornada
+  if (slide.id === 10) return '/videos/bg-vd-azul.mp4';
+  // Slide 13, 14, 15, 17: Gradiente escuro
+  if ([13, 14, 15, 17].includes(slide.id)) return '/videos/bg-gradient-escuro.mp4';
+  // Slide 18: Onda baixa
+  if (slide.id === 18) return '/videos/bg-onda-baixo.mp4';
+  // Slide 19: Vídeo claro 2
+  if (slide.id === 19) return '/videos/bg-vd-branco-2.mp4';
+  // Slide 20: Linhas
+  if (slide.id === 20) return '/videos/bg-vd-linhas.mp4';
+  // Slide 21: Vídeo claro 3
+  if (slide.id === 21) return '/videos/bg-vd-branco-3.mp4';
+  // Fallback para slides claros
+  if (!slide.isLight) return null;
+  const lightSlidesBefore = slidesData.filter((item) => item.isLight && item.id <= slide.id);
+  return lightBackgroundVideos[(lightSlidesBefore.length - 1) % lightBackgroundVideos.length];
+}
+
+export function getSlideBackgroundOverlay(slide) {
+  if (!slide) return null;
+  // Slide 7 (Marcas) recebe overlay consideravelmente mais escuro com gradiente e blur para máxima legibilidade
+  if (slide.id === 7) return 'marcas-dark-overlay';
+  // Slides com vídeo de líquido recebem overlay escuro reforçado para máximo contraste
+  if ([2, 4, 5, 8, 9].includes(slide.id)) return 'liquid-overlay';
+  // Slide 16 com pontos recebe overlay escuro profundo para atenuar brilho e destacar textos
+  if (slide.id === 16) return 'points-overlay';
+  // Slide 10 recebe overlay azul escuro de alta legibilidade
+  if (slide.id === 10) return 'soft-blue';
+  // Slides com gradiente escuro recebem overlay escuro consistente
+  if ([13, 14, 15, 17].includes(slide.id)) return 'soft-black';
+  // Slide 20 com linhas
+  if (slide.id === 20) return 'lines-overlay';
+  return null;
+}
+
+const ALL_BACKGROUND_VIDEOS = [
+  '/videos/bg-vd-escuro.mp4',
+  '/videos/bg-vd-liquid-escuro.mp4',
+  '/videos/bg-vd-branco.mp4',
+  '/videos/bg-vd-branco-2.mp4',
+  '/videos/bg-vd-branco-3.mp4',
+  '/videos/bg-vd-escuro-pontos.mp4',
+  '/videos/bg-vd-azul.mp4',
+  '/videos/bg-gradient-escuro.mp4',
+  '/videos/bg-onda-baixo.mp4',
+  '/videos/bg-vd-linhas.mp4',
+];
+
+const preloadedVideos = new Set();
+function preloadAllVideos() {
+  ALL_BACKGROUND_VIDEOS.forEach((src) => {
+    if (preloadedVideos.has(src)) return;
+    preloadedVideos.add(src);
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'video';
+    link.type = 'video/mp4';
+    link.href = src;
+    document.head.appendChild(link);
+  });
+}
+
 export default function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [hasStarted, setHasStarted] = useState(false);
@@ -48,6 +123,11 @@ export default function App() {
   const totalSlides = slidesData.length;
   const currentSlide = slidesData[currentIndex] || slidesData[0];
   const backgroundVideo = getSlideBackgroundVideo(currentSlide);
+  const backgroundOverlay = getSlideBackgroundOverlay(currentSlide);
+
+  useEffect(() => {
+    preloadAllVideos();
+  }, []);
 
   const goToSlide = useCallback((index) => {
     if (index >= 0 && index < totalSlides && index !== currentIndex) {
@@ -57,9 +137,11 @@ export default function App() {
       setCurrentIndex(index);
     }
   }, [currentIndex, totalSlides]);
+
   const registerAccordionNavigation = useCallback((navigation) => {
     accordionNavigationRef.current = navigation;
   }, []);
+
   const handleNext = useCallback(() => {
     if (accordionNavigationRef.current?.advance?.()) {
       playTickSound(620, 0.05);
@@ -67,6 +149,7 @@ export default function App() {
     }
     goToSlide(currentIndex + 1);
   }, [currentIndex, goToSlide]);
+
   const handlePrev = useCallback(() => {
     if (accordionNavigationRef.current?.retreat?.()) {
       playTickSound(430, 0.05);
@@ -74,11 +157,13 @@ export default function App() {
     }
     goToSlide(currentIndex - 1);
   }, [currentIndex, goToSlide]);
+
   const handleToggleFullscreen = useCallback(() => {
     const element = containerRef.current;
     if (!document.fullscreenElement) element?.requestFullscreen?.().catch(() => {});
     else document.exitFullscreen?.().catch(() => {});
   }, []);
+
   const startPresentation = useCallback(() => setHasStarted(true), []);
   const returnToIntro = useCallback(() => {
     setCurrentIndex(0);
@@ -122,32 +207,80 @@ export default function App() {
         const diff = touchStartX - e.changedTouches[0].clientX;
         if (hasStarted && Math.abs(diff) > 52) diff > 0 ? handleNext() : handlePrev();
       }}>
-        {/* Background manager persistente desacoplado das transições dos slides */}
-        <BackgroundManager
-          currentSlide={hasStarted ? currentSlide : slidesData[0]}
-          currentIndex={hasStarted ? currentIndex : 0}
-          hasStarted={hasStarted}
-        />
-
         {!hasStarted ? (
           <IntroScreen onStart={startPresentation} />
         ) : (
           <>
-            <div className="presentation-progress" aria-hidden="true"><span style={{ width: `${((currentIndex + 1) / totalSlides) * 100}%` }} /></div>
+            <div className="presentation-progress" aria-hidden="true">
+              <span style={{ width: `${((currentIndex + 1) / totalSlides) * 100}%` }} />
+            </div>
             <AnimatePresence mode="wait" custom={direction} initial={false}>
-              <motion.section key={currentSlide.id} custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ duration: reducedMotion ? 0 : 0.48, ease: [0.22, 0.8, 0.2, 1] }} className={`slide-frame ${currentSlide.isLight ? 'light' : 'dark'} ${currentSlide.id === 1 ? 'cover-slide' : ''} ${backgroundVideo ? 'video-background' : ''}`}>
-                <SlideRenderer slide={currentSlide} index={currentIndex} totalSlides={totalSlides} onGoToSlide={goToSlide} onRegisterNavigation={registerAccordionNavigation} />
-                <PresentationChrome isLight={currentSlide.isLight} page={currentIndex + 1} showMark={currentIndex !== 0} />
+              <motion.section
+                key={currentSlide.id}
+                custom={direction}
+                variants={variants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: reducedMotion ? 0 : 0.48, ease: [0.22, 0.8, 0.2, 1] }}
+                className={`slide-frame ${currentSlide.isLight ? 'light' : 'dark'} ${currentSlide.id === 1 ? 'cover-slide' : ''} ${backgroundVideo ? 'video-background' : ''}`}
+              >
+                {backgroundVideo && (
+                  <video
+                    className="slide-background-video"
+                    src={backgroundVideo}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="auto"
+                    aria-hidden="true"
+                    tabIndex={-1}
+                  />
+                )}
+                {backgroundOverlay && (
+                  <div className={`slide-video-overlay ${backgroundOverlay}`} aria-hidden="true" />
+                )}
+                <SlideRenderer
+                  slide={currentSlide}
+                  index={currentIndex}
+                  totalSlides={totalSlides}
+                  onGoToSlide={goToSlide}
+                  onRegisterNavigation={registerAccordionNavigation}
+                />
+                <PresentationChrome
+                  isLight={currentSlide.isLight}
+                  page={currentIndex + 1}
+                  showMark={currentIndex !== 0}
+                />
               </motion.section>
             </AnimatePresence>
           </>
         )}
       </div>
-      {hasStarted && <>
-        <HudControls currentIndex={currentIndex} totalSlides={totalSlides} currentTitle={currentSlide.title || `Slide ${currentIndex + 1}`} onPrev={handlePrev} onNext={handleNext} onHome={returnToIntro} onToggleOverview={() => setOverviewOpen(true)} onToggleShortcuts={() => setShortcutsOpen(true)} onToggleFullscreen={handleToggleFullscreen} />
-        <OverviewModal isOpen={overviewOpen} onClose={() => setOverviewOpen(false)} slides={slidesData} currentIndex={currentIndex} onSelectSlide={goToSlide} />
-        <ShortcutsModal isOpen={shortcutsOpen} onClose={() => setShortcutsOpen(false)} />
-      </>}
+      {hasStarted && (
+        <>
+          <HudControls
+            currentIndex={currentIndex}
+            totalSlides={totalSlides}
+            currentTitle={currentSlide.title || `Slide ${currentIndex + 1}`}
+            onPrev={handlePrev}
+            onNext={handleNext}
+            onHome={returnToIntro}
+            onToggleOverview={() => setOverviewOpen(true)}
+            onToggleShortcuts={() => setShortcutsOpen(true)}
+            onToggleFullscreen={handleToggleFullscreen}
+          />
+          <OverviewModal
+            isOpen={overviewOpen}
+            onClose={() => setOverviewOpen(false)}
+            slides={slidesData}
+            currentIndex={currentIndex}
+            onSelectSlide={goToSlide}
+          />
+          <ShortcutsModal isOpen={shortcutsOpen} onClose={() => setShortcutsOpen(false)} />
+        </>
+      )}
     </main>
   );
 }

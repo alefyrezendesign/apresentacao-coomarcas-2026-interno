@@ -54,7 +54,7 @@ export default function Slide01Hero({ slide, index, totalSlides = 21 }) {
           <span className="text-sm sm:text-base font-bold tracking-widest text-white uppercase font-mono">{typedTag}{typedTag.length < tagText.length && <span className="inline-block w-1.5 h-4 bg-blue-400 ml-1 align-middle animate-pulse" />}</span>
         </motion.div>
 
-        <h1 aria-label={headlineLines.join(' ')} style={{ color: '#ff2222' }} className="text-5xl sm:text-7xl md:text-8xl lg:text-[5.5rem] 2xl:text-[6.85rem] font-bold tracking-tight text-[#ff2222] leading-[.98] mb-16 max-w-[22ch]">
+        <h1 aria-label={headlineLines.join(' ')} className="text-5xl sm:text-7xl md:text-8xl lg:text-[5.5rem] 2xl:text-[6.85rem] font-bold tracking-tight text-white leading-[.98] mb-16 max-w-[22ch]">
           {headlineLines.map((line, lineIndex) => (
             <span key={line} className="block h-[1.1em] overflow-hidden pb-[0.1em]" aria-hidden="true">
               <span className={`cover-title-reveal${lineIndex === 1 ? ' cover-title-reveal--second' : ''}`}>

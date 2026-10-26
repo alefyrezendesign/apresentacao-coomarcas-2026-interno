@@ -22,10 +22,16 @@ body { background: #000; }
 .presentation-shell { width: 100%; height: 100%; min-height: 100svh; position: relative; display: grid; place-items: center; overflow: hidden; background: #000; isolation: isolate; }
 .presentation-stage { position: relative; width: min(100vw, 177.77778svh); aspect-ratio: 16 / 9; max-height: 100svh; overflow: hidden; box-shadow: 0 34px 100px rgba(0, 0, 0, .55); }
 .slide-frame { position: absolute; inset: 0; overflow: hidden; }
-.slide-background-video { position: absolute; z-index: 0; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
-.slide-video-overlay { position: absolute; z-index: 1; inset: 0; pointer-events: none; }
+.slide-background-video { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.slide-video-overlay { position: absolute; z-index: 10 !important; inset: 0; pointer-events: none; }
 .slide-video-overlay.soft-black { background: rgba(3, 5, 8, .68); }
-.slide-video-overlay.points-overlay { background: rgba(2, 4, 8, .82); }
+.slide-video-overlay.points-overlay { background: rgba(2, 4, 8, .84); }
+.slide-video-overlay.marcas-dark-overlay {
+  background: rgba(2, 4, 8, .92);
+  background-image: linear-gradient(180deg, rgba(1, 3, 6, .96) 0%, rgba(2, 5, 12, .88) 50%, rgba(1, 3, 6, .96) 100%);
+  backdrop-filter: blur(1.5px);
+  -webkit-backdrop-filter: blur(1.5px);
+}
 .slide-video-overlay.soft-blue { background: rgba(2, 6, 18, .78); }
 .slide-video-overlay.lines-overlay { background: rgba(0, 0, 0, .45); }
 .slide-video-overlay.liquid-overlay {

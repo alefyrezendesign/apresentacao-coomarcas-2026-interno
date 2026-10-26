@@ -3,6 +3,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { slidesData } from './data/slidesData';
 import SlideRenderer from './slides/SlideRenderer';
 import AmbientParticles from './components/AmbientParticles';
+import BackgroundManager, { getSlideBackgroundVideo } from './components/BackgroundManager';
 import HudControls from './components/HudControls';
 import OverviewModal from './components/OverviewModal';
 import ShortcutsModal from './components/ShortcutsModal';
@@ -34,60 +35,6 @@ function PresentationChrome({ isLight, page, showMark = true }) {
   );
 }
 
-const lightBackgroundVideos = [
-  '/videos/bg-vd-branco.mp4',
-  '/videos/bg-vd-branco-2.mp4',
-  '/videos/bg-vd-branco-3.mp4',
-];
-
-const preloadedBackgrounds = new Set();
-
-function slideBackgroundVideo(slide) {
-  if ([2, 4, 5, 8, 9].includes(slide.id)) return '/videos/bg-vd-liquid-escuro.mp4';
-  if (slide.id === 1 || slide.id === 6) return '/videos/bg-vd-escuro.mp4';
-  if ([7, 16].includes(slide.id)) return '/videos/bg-vd-escuro-pontos.mp4';
-  if (slide.id === 10) return '/videos/bg-vd-azul.mp4';
-  if ([14, 15].includes(slide.id)) return '/videos/bg-gradient-escuro.mp4';
-  if (slide.id === 18) return '/videos/bg-onda-baixo.mp4';
-  if (slide.id === 19) return '/videos/bg-vd-branco-2.mp4';
-  if (slide.id === 20) return '/videos/bg-vd-linhas.mp4';
-  if (slide.id === 21) return '/videos/bg-vd-branco-3.mp4';
-  if (!slide.isLight) return null;
-  const lightSlidesBefore = slidesData.filter((item) => item.isLight && item.id <= slide.id);
-  return lightBackgroundVideos[(lightSlidesBefore.length - 1) % lightBackgroundVideos.length];
-}
-
-function slideBackgroundOverlay(slide) {
-  if ([2, 4, 5, 8, 9].includes(slide.id)) return 'liquid-overlay';
-  if ([7, 16].includes(slide.id)) return 'soft-black points-overlay';
-  if (slide.id === 10) return 'soft-blue';
-  if ([14, 15].includes(slide.id)) return 'soft-black';
-  if (slide.id === 20) return 'lines-overlay';
-  return null;
-}
-
-function preloadBackgroundVideo(source) {
-  if (!source || preloadedBackgrounds.has(source)) return;
-  preloadedBackgrounds.add(source);
-
-  const preload = document.createElement('link');
-  preload.rel = 'preload';
-  preload.as = 'video';
-  preload.type = 'video/mp4';
-  preload.href = source;
-  document.head.appendChild(preload);
-}
-
-function nextBackgroundVideo(fromIndex) {
-  const currentSource = slideBackgroundVideo(slidesData[fromIndex]);
-  for (let index = fromIndex + 1; index < slidesData.length; index += 1) {
-    const source = slideBackgroundVideo(slidesData[index]);
-    if (!source || source === currentSource) continue;
-    return source;
-  }
-  return null;
-}
-
 export default function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [hasStarted, setHasStarted] = useState(false);
@@ -100,14 +47,7 @@ export default function App() {
   const reducedMotion = useReducedMotion();
   const totalSlides = slidesData.length;
   const currentSlide = slidesData[currentIndex] || slidesData[0];
-  const backgroundVideo = slideBackgroundVideo(currentSlide);
-  const backgroundOverlay = slideBackgroundOverlay(currentSlide);
-
-  useEffect(() => {
-    if (!hasStarted) return;
-    preloadBackgroundVideo(backgroundVideo);
-    preloadBackgroundVideo(nextBackgroundVideo(currentIndex));
-  }, [backgroundVideo, currentIndex, hasStarted]);
+  const backgroundVideo = getSlideBackgroundVideo(currentSlide);
 
   const goToSlide = useCallback((index) => {
     if (index >= 0 && index < totalSlides && index !== currentIndex) {
@@ -182,17 +122,26 @@ export default function App() {
         const diff = touchStartX - e.changedTouches[0].clientX;
         if (hasStarted && Math.abs(diff) > 52) diff > 0 ? handleNext() : handlePrev();
       }}>
-        {!hasStarted ? <IntroScreen onStart={startPresentation} /> : <>
-          <div className="presentation-progress" aria-hidden="true"><span style={{ width: `${((currentIndex + 1) / totalSlides) * 100}%` }} /></div>
-          <AnimatePresence mode="wait" custom={direction} initial={false}>
-            <motion.section key={currentSlide.id} custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ duration: reducedMotion ? 0 : 0.48, ease: [0.22, 0.8, 0.2, 1] }} className={`slide-frame ${currentSlide.isLight ? 'light' : 'dark'} ${currentSlide.id === 1 ? 'cover-slide' : ''} ${backgroundVideo ? 'video-background' : ''}`}>
-              {backgroundVideo && <video className="slide-background-video" src={backgroundVideo} autoPlay muted loop playsInline preload="auto" aria-hidden="true" tabIndex={-1} />}
-              {backgroundOverlay && <div className={`slide-video-overlay ${backgroundOverlay}`} aria-hidden="true" />}
-              <SlideRenderer slide={currentSlide} index={currentIndex} totalSlides={totalSlides} onGoToSlide={goToSlide} onRegisterNavigation={registerAccordionNavigation} />
-              <PresentationChrome isLight={currentSlide.isLight} page={currentIndex + 1} showMark={currentIndex !== 0} />
-            </motion.section>
-          </AnimatePresence>
-        </>}
+        {/* Background manager persistente desacoplado das transições dos slides */}
+        <BackgroundManager
+          currentSlide={hasStarted ? currentSlide : slidesData[0]}
+          currentIndex={hasStarted ? currentIndex : 0}
+          hasStarted={hasStarted}
+        />
+
+        {!hasStarted ? (
+          <IntroScreen onStart={startPresentation} />
+        ) : (
+          <>
+            <div className="presentation-progress" aria-hidden="true"><span style={{ width: `${((currentIndex + 1) / totalSlides) * 100}%` }} /></div>
+            <AnimatePresence mode="wait" custom={direction} initial={false}>
+              <motion.section key={currentSlide.id} custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ duration: reducedMotion ? 0 : 0.48, ease: [0.22, 0.8, 0.2, 1] }} className={`slide-frame ${currentSlide.isLight ? 'light' : 'dark'} ${currentSlide.id === 1 ? 'cover-slide' : ''} ${backgroundVideo ? 'video-background' : ''}`}>
+                <SlideRenderer slide={currentSlide} index={currentIndex} totalSlides={totalSlides} onGoToSlide={goToSlide} onRegisterNavigation={registerAccordionNavigation} />
+                <PresentationChrome isLight={currentSlide.isLight} page={currentIndex + 1} showMark={currentIndex !== 0} />
+              </motion.section>
+            </AnimatePresence>
+          </>
+        )}
       </div>
       {hasStarted && <>
         <HudControls currentIndex={currentIndex} totalSlides={totalSlides} currentTitle={currentSlide.title || `Slide ${currentIndex + 1}`} onPrev={handlePrev} onNext={handleNext} onHome={returnToIntro} onToggleOverview={() => setOverviewOpen(true)} onToggleShortcuts={() => setShortcutsOpen(true)} onToggleFullscreen={handleToggleFullscreen} />

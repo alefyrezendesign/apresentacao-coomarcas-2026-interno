@@ -224,9 +224,9 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
           <p className="max-w-5xl mt-4 text-white/68">Atua de forma neutra e estratégica entre marcas, clientes e BUs: detecta riscos precoces, exige prazos e zela pela fidelização — sem executar tarefas técnicas.</p>
         </header>
 
-        <main className="w-full max-w-none mx-auto flex-1 min-h-0 flex flex-col justify-center py-4 sm:py-5">
-          <section className="relative isolate mx-auto w-full max-w-3xl h-[17rem] sm:h-[18rem]" aria-label="Áreas conectadas ao suporte relacional">
-            <img src="/videos/globo.gif" alt="" className="pointer-events-none absolute z-0 left-1/2 top-1/2 h-60 w-60 sm:h-72 sm:w-72 -translate-x-1/2 -translate-y-1/2 object-contain" />
+        <main className="relative isolate w-full max-w-none mx-auto flex-1 min-h-0 flex flex-col justify-center py-4 sm:py-5">
+          <img src="/videos/globo.gif" alt="" className="pointer-events-none absolute z-0 left-1/2 top-[56%] h-60 w-60 sm:h-72 sm:w-72 -translate-x-1/2 -translate-y-1/2 object-contain" />
+          <section className="relative z-10 mx-auto w-full max-w-3xl h-[17rem] sm:h-[18rem]" aria-label="Áreas conectadas ao suporte relacional">
             {satellites.map((sat, index) => (
               <span key={sat} className={`absolute z-10 inline-flex items-center px-3 py-2 bg-white/[0.045] border border-white/16 text-[.66rem] sm:text-[.7rem] font-bold tracking-[.1em] text-white/76 whitespace-nowrap ${satellitePositions[index]}`}>
                 {sat}
@@ -234,7 +234,7 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
             ))}
           </section>
 
-          <section className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 mt-1">
+          <section className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 mt-1">
             <article className="min-h-[8.75rem] p-5 sm:px-6 sm:py-5 bg-white/[0.035] border border-white/15 flex flex-col">
               <span className="inline-flex w-fit items-center gap-1.5 rounded-full border border-[#76d8ff]/35 bg-[#199bd0]/[.10] px-2.5 py-1 text-[.65rem] font-bold tracking-[.1em] uppercase text-[#a4e5ff] mb-3"><ShieldCheck className="size-3" strokeWidth={2} aria-hidden="true" />PREVENIR</span>
               <h4 className="text-xl font-semibold text-white leading-tight">Saúde da carteira</h4>

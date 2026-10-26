@@ -40,6 +40,8 @@ const lightBackgroundVideos = [
   '/videos/bg-vd-branco-3.mp4',
 ];
 
+const preloadedBackgrounds = new Set();
+
 function slideBackgroundVideo(slide) {
   if (slide.id === 1 || slide.id === 2 || slide.id === 6) return '/videos/bg-vd-escuro.mp4';
   if (slide.id === 7) return '/videos/bg-vd-escuro-pontos.mp4';
@@ -61,6 +63,28 @@ function slideBackgroundOverlay(slide) {
   return null;
 }
 
+function preloadBackgroundVideo(source) {
+  if (!source || preloadedBackgrounds.has(source)) return;
+  preloadedBackgrounds.add(source);
+
+  const preload = document.createElement('link');
+  preload.rel = 'preload';
+  preload.as = 'video';
+  preload.type = 'video/mp4';
+  preload.href = source;
+  document.head.appendChild(preload);
+}
+
+function nextBackgroundVideo(fromIndex) {
+  const currentSource = slideBackgroundVideo(slidesData[fromIndex]);
+  for (let index = fromIndex + 1; index < slidesData.length; index += 1) {
+    const source = slideBackgroundVideo(slidesData[index]);
+    if (!source || source === currentSource) continue;
+    return source;
+  }
+  return null;
+}
+
 export default function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [hasStarted, setHasStarted] = useState(false);
@@ -75,6 +99,12 @@ export default function App() {
   const currentSlide = slidesData[currentIndex] || slidesData[0];
   const backgroundVideo = slideBackgroundVideo(currentSlide);
   const backgroundOverlay = slideBackgroundOverlay(currentSlide);
+
+  useEffect(() => {
+    if (!hasStarted) return;
+    preloadBackgroundVideo(backgroundVideo);
+    preloadBackgroundVideo(nextBackgroundVideo(currentIndex));
+  }, [backgroundVideo, currentIndex, hasStarted]);
 
   const goToSlide = useCallback((index) => {
     if (index >= 0 && index < totalSlides && index !== currentIndex) {

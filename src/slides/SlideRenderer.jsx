@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle2, AlertCircle, ArrowRight, ShieldCheck, Sparkles, Layers, Zap, Clock, Users, Database } from 'lucide-react';
+import { CheckCircle2, AlertCircle, ArrowRight, ShieldCheck, Sparkles, Layers, Zap, Clock, Users, Database, Award } from 'lucide-react';
 import OrganogramaInteractive from '../components/OrganogramaInteractive';
 import Slide01Hero from './Slide01Hero';
 import Slide02Transformacao from './Slide02Transformacao';
@@ -9,6 +9,8 @@ import Slide04Principios from './Slide04Principios';
 import Slide05Fronts from './Slide05Fronts';
 import Slide07Marcas from './Slide07Marcas';
 import Slide08Transicao from './Slide08Transicao';
+import Slide09BU from './Slide09BU';
+import ContentAccordion from '../components/ContentAccordion';
 
 export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSlide, onRegisterNavigation }) {
   // 1. CAPA HERO (Slide 01)
@@ -109,125 +111,56 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
 
   // 7. SLIDE 09: 06 / ANATOMIA DE UMA BU
   if (slide.id === 9) {
-    return (
-      <div className="w-full h-full flex flex-col justify-between py-6 px-8 md:px-14 lg:px-20 bg-[#0a0d12] text-[#f1f4f8] select-none">
-        <div className="flex justify-between items-start mb-3">
-          <div>
-            <span className="inline-block text-xs font-bold tracking-widest uppercase bg-white/5 border border-white/15 px-4 py-1 rounded-full text-[#d5dbe4] mb-2">
-              {slide.eyebrow}
-            </span>
-            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white">
-              Uma conta acompanhada.<br />Uma equipe coordenada.
-            </h2>
-            <p className="text-sm sm:text-base text-[#a3adb8] max-w-4xl mt-1">
-              A BU combina a proximidade de um gestor de conta dedicado à especialização técnica multidisciplinar por nicho.
-            </p>
-          </div>
-          <span className="text-4xl sm:text-6xl font-black text-white/10">06</span>
-        </div>
-
-        <div className="flex-1 min-h-0 flex flex-col justify-center gap-4">
-          <div className="text-center p-3 rounded-xl bg-white/5 border border-white/15 font-bold text-sm tracking-wider text-[#a3adb8] max-w-md mx-auto">
-            GESTÃO DA BU / DIRETORIA OPERACIONAL (COO)
-          </div>
-
-          <div className="text-center p-4 rounded-xl bg-white text-black font-bold text-lg shadow-xl max-w-xl mx-auto border-2 border-white">
-            KEY ACCOUNT (KA)
-            <span className="block text-xs font-medium text-neutral-700 mt-0.5">
-              Gestora da conta, guardiã dos compromissos e interlocutora do cliente
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-2">
-            <div className="p-4 rounded-xl bg-white/5 border border-white/15">
-              <span className="text-xs font-bold text-[#a3adb8] block mb-1">CANAL DE ENTRADA</span>
-              <h4 className="text-lg font-bold text-white mb-1">Atendimento</h4>
-              <p className="text-xs text-[#d5dbe4] leading-relaxed">
-                Receber, protocolar, sanar dúvidas imediatas e dar devolutiva rápida ao cliente.
-              </p>
-            </div>
-            <div className="p-4 rounded-xl bg-white/5 border border-white/15">
-              <span className="text-xs font-bold text-[#a3adb8] block mb-1">TRIBUTOS</span>
-              <h4 className="text-lg font-bold text-white mb-1">Fiscal</h4>
-              <p className="text-xs text-[#d5dbe4] leading-relaxed">
-                Executar apurações fiscais, conferir obrigações e revisar impostos com rigor.
-              </p>
-            </div>
-            <div className="p-4 rounded-xl bg-white/5 border border-white/15">
-              <span className="text-xs font-bold text-[#a3adb8] block mb-1">CONTABILIDADE</span>
-              <h4 className="text-lg font-bold text-white mb-1">Contábil</h4>
-              <p className="text-xs text-[#d5dbe4] leading-relaxed">
-                Conciliação, balancetes fidedignos e relatórios gerenciais com conformidade.
-              </p>
-            </div>
-            <div className="p-4 rounded-xl bg-white/5 border border-white/15">
-              <span className="text-xs font-bold text-[#a3adb8] block mb-1">PESSOAL</span>
-              <h4 className="text-lg font-bold text-white mb-1">Departamento Pessoal</h4>
-              <p className="text-xs text-[#d5dbe4] leading-relaxed">
-                Executar folha, encargos, admissões, rescisões e conformidade trabalhista.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-4 p-3.5 rounded-xl bg-white/5 border border-white/15 flex items-center gap-3 text-sm text-[#d5dbe4]">
-          <span className="px-3 py-1 rounded-md bg-white text-black font-bold text-xs uppercase tracking-wider shrink-0">
-            ALÇADAS DE DECISÃO
-          </span>
-          <span><b>Atenção:</b> O Key Account articula a conta e cobra compromissos. Ele não substitui o responsável técnico nem dispensa a revisão formal.</span>
-        </div>
-      </div>
-    );
+    return <Slide09BU slide={slide} onRegisterNavigation={onRegisterNavigation} />;
   }
 
   // 8. SLIDE 10: 07 / A JORNADA DO CLIENTE
   if (slide.id === 10) {
     const steps = [
-      { num: "01", title: "Venda", desc: "Comercial qualifica, contrata e formaliza o escopo." },
-      { num: "02", title: "Passagem", desc: "Comercial transfere dossiê completo ao Onboarding." },
-      { num: "03", title: "Implantação", desc: "Onboarding cadastra, parametriza e alinha rotinas." },
-      { num: "04", title: "Aceite BU", desc: "KA e líderes técnicos conferem base e assinam aceite." },
-      { num: "05", title: "Estabilização", desc: "Primeiros 90 dias com acompanhamento conjunto BU + CS." },
-      { num: "06", title: "Carteira", desc: "Rotina contínua com KA e Suporte Relacional." },
-      { num: "07", title: "Evolução", desc: "Identificação de novas necessidades e cross-sell." },
-      { num: "08", title: "Retenção", desc: "Tratamento de atritos, comitê de retenção ou offboarding." },
+      { num: "01", title: "Venda", desc: "Comercial qualifica, contrata e formaliza o escopo.", Icon: Layers },
+      { num: "02", title: "Passagem", desc: "Comercial transfere dossiê completo ao Onboarding.", Icon: ArrowRight },
+      { num: "03", title: "Implantação", desc: "Onboarding cadastra, parametriza e alinha rotinas.", Icon: Database },
+      { num: "04", title: "Aceite BU", desc: "KA e líderes técnicos conferem base e assinam aceite.", Icon: CheckCircle2 },
+      { num: "05", title: "Estabilização", desc: "Primeiros 90 dias com acompanhamento conjunto BU + CS.", Icon: Clock },
+      { num: "06", title: "Carteira", desc: "Rotina contínua com KA e Suporte Relacional.", Icon: Users },
+      { num: "07", title: "Evolução", desc: "Identificação de novas necessidades e cross-sell.", Icon: Sparkles },
+      { num: "08", title: "Retenção", desc: "Tratamento de atritos, comitê de retenção ou offboarding.", Icon: ShieldCheck },
     ];
 
     return (
-      <div className="w-full h-full flex flex-col justify-between py-6 px-8 md:px-14 lg:px-20 bg-[#0a0d12] text-[#f1f4f8] select-none">
-        <div className="flex justify-between items-start mb-3">
-          <div>
-            <span className="inline-block text-xs font-bold tracking-widest uppercase bg-white/5 border border-white/15 px-4 py-1 rounded-full text-[#d5dbe4] mb-2">
-              {slide.eyebrow}
-            </span>
-            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white">
-              A jornada é única. Os responsáveis mudam.
-            </h2>
-            <p className="text-sm sm:text-base text-[#a3adb8] max-w-4xl mt-1">
-              Do primeiro contato à retenção contínua, cada transição entre equipes exige clareza de escopo, registro documental e aceite expresso.
-            </p>
-          </div>
-          <span className="text-4xl sm:text-6xl font-black text-white/10">07</span>
-        </div>
-
-        <div className="flex-1 min-h-0 grid grid-cols-2 md:grid-cols-4 gap-4 items-stretch my-auto">
-          {steps.map((st, i) => (
-            <div key={i} className="p-4 rounded-xl bg-white/5 border border-white/15 hover:border-white/30 transition-all flex flex-col justify-between">
-              <div>
-                <span className="text-2xl font-black font-mono text-white/40 block mb-2">{st.num}</span>
-                <h4 className="text-lg font-bold text-white mb-1">{st.title}</h4>
-              </div>
-              <p className="text-xs text-[#a3adb8] leading-relaxed mt-2">{st.desc}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-4 p-3.5 rounded-xl bg-white/5 border border-white/15 flex items-center gap-3 text-sm text-[#d5dbe4]">
-          <span className="px-3 py-1 rounded-md bg-white text-black font-bold text-xs uppercase tracking-wider shrink-0">
-            GOVERNANÇA
+      <div className="w-full h-full flex flex-col py-10 px-8 sm:px-14 lg:px-24 bg-[#0a0d12] text-[#f1f4f8] select-none">
+        <header className="w-full max-w-6xl mx-auto shrink-0">
+          <span className="slide-standard-tag text-sm font-bold tracking-[.14em] uppercase text-white/65 mb-4">
+            {slide.eyebrow}
           </span>
-          <span>Nenhum cliente é considerado transferido até que a área receptora confirme o recebimento formal e valide os cadastros e dados.</span>
+          <h2 className="text-4xl sm:text-5xl lg:text-[3.4rem] font-bold tracking-tight leading-[1.02] text-white">
+              A jornada é única. Os responsáveis mudam.
+          </h2>
+          <p className="max-w-6xl mt-4 text-white/68">
+            Do primeiro contato à retenção contínua, cada transição entre equipes exige clareza de escopo, registro documental e aceite expresso.
+          </p>
+        </header>
+
+        <div className="w-full max-w-6xl mx-auto flex-1 min-h-0 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 content-center py-7">
+          {steps.map((st) => {
+            const Icon = st.Icon;
+            return (
+            <article key={st.num} className="relative min-h-[10.5rem] p-5 sm:p-6 bg-white/[0.035] border border-white/15 hover:border-white/28 transition-colors flex flex-col justify-between">
+              <div>
+                <span className="text-xl font-black font-mono text-white/40 block mb-3">{st.num}</span>
+                <h4 className="text-xl font-semibold tracking-tight leading-tight text-white">{st.title}</h4>
+              </div>
+              <Icon className="absolute right-5 top-5 w-4 h-4 text-white/46" strokeWidth={1.65} aria-hidden="true" />
+              <p className="text-[.96rem] text-white/68 leading-snug mt-5">{st.desc}</p>
+            </article>
+            );
+          })}
         </div>
+
+        <footer className="w-full max-w-6xl mx-auto shrink-0 flex items-start gap-4 pt-1 text-[#d5dbe4]">
+          <span className="shrink-0 font-bold text-xs uppercase tracking-[.14em] text-white/60">GOVERNANÇA</span>
+          <span className="text-sm sm:text-base leading-snug text-white/76">Nenhum cliente é considerado transferido até que a área receptora confirme o recebimento formal e valide os cadastros e dados.</span>
+        </footer>
       </div>
     );
   }
@@ -235,42 +168,39 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
   // 9. SLIDE 11: REGRA DE OURO DA TRANSIÇÃO (Light Mode Accent ⚡)
   if (slide.id === 11) {
     return (
-      <div className="w-full h-full flex flex-col justify-between py-8 px-10 md:px-16 lg:px-24 bg-[#f8f9fa] text-[#0a0d12] select-none">
-        <div className="flex justify-between items-start">
-          <div>
-            <span className="inline-block text-xs md:text-sm font-bold tracking-widest uppercase bg-black/5 border border-black/15 px-4 py-1.5 rounded-full text-[#0a0d12] mb-3">
-              {slide.eyebrow}
-            </span>
-            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#0a0d12]">
-              A regra que protege a entrega e o cliente.
-            </h2>
-          </div>
-          <span className="text-5xl sm:text-7xl font-black text-black/10">⚡</span>
-        </div>
+      <div className="w-full h-full flex flex-col px-8 sm:px-14 lg:px-24 pt-16 sm:pt-20 pb-14 sm:pb-16 bg-[#f8f9fa] text-[#0a0d12] select-none">
+        <header className="w-full max-w-7xl mx-auto shrink-0">
+          <span className="slide-standard-tag text-sm font-bold tracking-[.14em] uppercase text-black/60 mb-4">
+            {slide.eyebrow}
+          </span>
+          <h2 className="text-4xl sm:text-5xl lg:text-[3.4rem] font-bold tracking-tight leading-[1.02] text-[#0a0d12]">
+            A regra que protege a entrega e o cliente.
+          </h2>
+        </header>
 
-        <div className="my-auto max-w-5xl">
-          <blockquote className="text-2xl sm:text-4xl md:text-5xl font-bold text-[#0a0d12] leading-tight mb-8">
+        <div className="w-full max-w-7xl mx-auto flex-1 min-h-0 flex flex-col justify-center py-8 sm:py-10">
+          <blockquote className="max-w-6xl text-2xl sm:text-3xl lg:text-[2.55rem] font-normal tracking-tight text-[#0a0d12] leading-[1.08]">
             “Ninguém transfere um cliente ou uma demanda sem{' '}
-            <span className="border-b-4 border-black">responsável nominal</span>,{' '}
-            <span className="border-b-4 border-black">prazo pactuado</span>,{' '}
-            <span className="border-b-4 border-black">contexto completo</span> e{' '}
-            <span className="border-b-4 border-black">aceite registrado</span>.”
+            <span className="font-bold">responsável nominal</span>,{' '}
+            <span className="font-bold">prazo pactuado</span>,{' '}
+            <span className="font-bold">contexto completo</span> e{' '}
+            <span className="font-bold">aceite registrado</span>.”
           </blockquote>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {slide.pillars?.map((p, i) => (
-              <div key={i} className="p-5 rounded-2xl bg-white border border-[#dbe0e6] shadow-sm">
-                <h4 className="text-base font-bold text-[#0a0d12] mb-1">{p.title}</h4>
-                <p className="text-xs md:text-sm text-[#49525c] leading-relaxed">{p.desc}</p>
-              </div>
-            ))}
+          <div className="mt-9">
+            <ContentAccordion items={slide.pillars || []} tone="light" columns={4} expandAll onRegisterNavigation={onRegisterNavigation} />
           </div>
         </div>
 
-        <div className="text-xs text-[#717d8a] border-t border-black/10 pt-3 flex justify-between">
-          <span>Regra de Ouro inegociável em todas as 15 marcas do Grupo</span>
+        <footer className="w-full max-w-7xl mx-auto shrink-0 pt-3 flex items-center justify-between gap-6">
+          <div className="flex items-center gap-3 text-[#0a0d12]">
+            <span className="w-11 h-11 shrink-0 rounded-full bg-[#c99a37]/15 border border-[#b78624]/60 flex items-center justify-center text-[#9b701a]">
+              <Award className="w-5 h-5" strokeWidth={1.8} aria-hidden="true" />
+            </span>
+            <span className="text-base sm:text-lg font-semibold leading-tight">Regra de Ouro inegociável em todas as 15 marcas do Grupo</span>
+          </div>
           <span>Coomarcas · Nossa Virada</span>
-        </div>
+        </footer>
       </div>
     );
   }

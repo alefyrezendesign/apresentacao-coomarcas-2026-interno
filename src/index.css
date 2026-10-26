@@ -61,7 +61,7 @@ body { background: #000; }
 .slide-frame.light > div:not(.presentation-chrome)::before { content: ''; position: absolute; inset: 0; pointer-events: none; z-index: -1; background-image: linear-gradient(rgba(0,0,0,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.025) 1px, transparent 1px); background-size: 42px 42px; mask-image: linear-gradient(to bottom, black, transparent 72%); }
 .slide-frame.light.video-background > div:not(.presentation-chrome)::before { display: none; }
 .cover-slide > div:not(.presentation-chrome)::before { display: none; }
-.cover-slide.video-background > div:not(.presentation-chrome) { background-color: transparent !important; background-image: none !important; }
+.cover-slide.video-background > div:not(.presentation-chrome):not(.slide-video-overlay) { background-color: transparent !important; background-image: none !important; }
 .slide-frame h1, .slide-frame h2, .slide-frame h3, .slide-frame h4 { font-family: var(--font-display) !important; letter-spacing: -.04em !important; }
 .slide-frame p { letter-spacing: -.01em; }
 

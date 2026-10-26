@@ -57,6 +57,7 @@ function slideBackgroundOverlay(slide) {
   if (slide.id === 2) return 'soft-black';
   if (slide.id === 7) return 'soft-black points-overlay';
   if (slide.id === 10) return 'soft-blue';
+  if (slide.id === 20) return 'lines-overlay';
   return null;
 }
 

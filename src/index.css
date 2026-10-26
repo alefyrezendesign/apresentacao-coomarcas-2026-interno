@@ -27,6 +27,7 @@ body { background: #000; }
 .slide-video-overlay.soft-black { background: rgba(0, 0, 0, .24); }
 .slide-video-overlay.points-overlay { background: rgba(0, 0, 0, .40); }
 .slide-video-overlay.soft-blue { background: rgba(3, 18, 70, .20); }
+.slide-video-overlay.lines-overlay { background: rgba(0, 0, 0, .40); }
 .slide-frame.video-background > div:not(.presentation-chrome):not(.slide-video-overlay) { z-index: 2; }
 .slide-frame:not(.cover-slide) > div:not(.presentation-chrome):not(.slide-video-overlay) {
   position: relative;

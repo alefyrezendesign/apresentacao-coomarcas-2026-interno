@@ -723,10 +723,12 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
         </div>
 
         <div className="my-auto grid grid-cols-1 lg:grid-cols-[.42fr_1fr] gap-8 lg:gap-12 items-stretch">
-          <aside className="hidden lg:flex flex-col justify-between border-r border-white/18 py-2 pr-9">
-            <span className="font-mono text-[.7rem] font-bold tracking-[.18em] uppercase text-white/46">Compromissos</span>
-            <span className="font-display text-[10rem] leading-[.72] font-semibold tracking-[-.1em] text-white/14">04</span>
-            <span className="max-w-[13rem] text-sm leading-relaxed text-white/58">O padrão da Coomarcas se confirma nas escolhas feitas todos os dias.</span>
+          <aside className="hidden lg:flex flex-col justify-center border-r border-white/18 py-2 pr-9">
+            <div>
+              <span className="block font-display text-[10rem] leading-[.72] font-semibold tracking-[-.1em] text-white/18">04</span>
+              <span className="mt-5 block font-mono text-[1.05rem] font-bold tracking-[.16em] uppercase text-white">Compromissos</span>
+            </div>
+            <p className="mt-12 max-w-[13rem] text-sm leading-relaxed text-white/58">O padrão da Coomarcas se confirma nas escolhas feitas todos os dias.</p>
           </aside>
           <section className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-7" aria-label="Quatro compromissos para o dia a dia">
             {comp.map((c) => {

@@ -454,6 +454,41 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
         </div>
 
         <main className="my-auto flex flex-col gap-9">
+          <section className="grid grid-cols-1 md:grid-cols-3 gap-7 md:gap-8" aria-label="Etapas da evidência">
+            <article className="pt-1">
+              <div className="flex items-center gap-3">
+                <span className="grid size-10 place-items-center bg-[#58616c] text-white text-xs font-black font-mono">01</span>
+                <span className="text-[.68rem] font-bold tracking-[.13em] uppercase text-white/72">Etapa</span>
+              </div>
+              <div className="mt-5 border-l border-white/20 pl-5">
+                <h4 className="evidence-stage-title text-white">Antes · Preparar</h4>
+                <p className="evidence-stage-copy mt-3 text-white/68">Analisar carteira, mapear dependências, confirmar prazos, identificar riscos e certificar executor, revisor e substituto antes de iniciar.</p>
+              </div>
+            </article>
+
+            <article className="pt-1">
+              <div className="flex items-center gap-3">
+                <span className="grid size-10 place-items-center bg-[#58616c] text-white text-xs font-black font-mono">02</span>
+                <span className="text-[.68rem] font-bold tracking-[.13em] uppercase text-white/72">Etapa</span>
+              </div>
+              <div className="mt-5 border-l border-white/20 pl-5">
+                <h4 className="evidence-stage-title text-white">Durante · Executar</h4>
+                <p className="evidence-stage-copy mt-3 text-white/68">Cumprir o processo homologado sem atalhos, comunicar bloqueios técnicos com antecedência e atualizar o sistema oficial em tempo real.</p>
+              </div>
+            </article>
+
+            <article className="pt-1">
+              <div className="flex items-center gap-3">
+                <span className="grid size-10 place-items-center bg-[#58616c] text-white text-xs font-black font-mono">03</span>
+                <span className="text-[.68rem] font-bold tracking-[.13em] uppercase text-white/72">Etapa</span>
+              </div>
+              <div className="mt-5 border-l border-white/20 pl-5">
+                <h4 className="evidence-stage-title text-white">Depois · Validar</h4>
+                <p className="evidence-stage-copy mt-3 text-white/68">Conduzir revisão técnica, coletar aceite formal, arquivar a evidência incontestável, dar retorno ao cliente e documentar melhorias.</p>
+              </div>
+            </article>
+          </section>
+
           <section className="grid grid-cols-2 md:grid-cols-4 border-y border-white/20" aria-label="Evidências mínimas de cada entrega">
             <article className="min-h-[7rem] p-4 sm:p-5 border-r border-b md:border-b-0 border-white/14">
               <Target className="size-4 text-[#a4e5ff] mb-3" strokeWidth={1.8} aria-hidden="true" />
@@ -474,42 +509,6 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
               <CheckCircle2 className="size-4 text-[#b9f1d5] mb-3" strokeWidth={1.8} aria-hidden="true" />
               <strong className="block text-base font-semibold text-white mb-1">Conclusão</strong>
               <p className="evidence-fact-copy text-white/60">Evidência arquivada + devolutiva formal.</p>
-            </article>
-          </section>
-
-          <section className="relative grid grid-cols-1 md:grid-cols-3 gap-7 md:gap-8" aria-label="Etapas da evidência">
-            <div className="hidden md:block absolute left-[16.7%] right-[16.7%] top-5 border-t border-dashed border-white/28" aria-hidden="true" />
-            <article className="relative pt-1">
-              <div className="relative z-10 flex items-center gap-3">
-                <span className="grid size-10 place-items-center bg-[#1688d3] text-white text-xs font-black font-mono">01</span>
-                <span className="text-[.68rem] font-bold tracking-[.13em] uppercase text-[#a4e5ff]">Etapa</span>
-              </div>
-              <div className="mt-5 border-l border-white/20 pl-5">
-                <h4 className="evidence-stage-title text-white">Antes · Preparar</h4>
-                <p className="evidence-stage-copy mt-3 text-white/68">Analisar carteira, mapear dependências, confirmar prazos, identificar riscos e certificar executor, revisor e substituto antes de iniciar.</p>
-              </div>
-            </article>
-
-            <article className="relative pt-1">
-              <div className="relative z-10 flex items-center gap-3">
-                <span className="grid size-10 place-items-center bg-[#9e7cd6] text-white text-xs font-black font-mono">02</span>
-                <span className="text-[.68rem] font-bold tracking-[.13em] uppercase text-[#d9c9ff]">Etapa</span>
-              </div>
-              <div className="mt-5 border-l border-white/20 pl-5">
-                <h4 className="evidence-stage-title text-white">Durante · Executar</h4>
-                <p className="evidence-stage-copy mt-3 text-white/68">Cumprir o processo homologado sem atalhos, comunicar bloqueios técnicos com antecedência e atualizar o sistema oficial em tempo real.</p>
-              </div>
-            </article>
-
-            <article className="relative pt-1">
-              <div className="relative z-10 flex items-center gap-3">
-                <span className="grid size-10 place-items-center bg-[#b9821c] text-white text-xs font-black font-mono">03</span>
-                <span className="text-[.68rem] font-bold tracking-[.13em] uppercase text-[#f2d28e]">Etapa</span>
-              </div>
-              <div className="mt-5 border-l border-white/20 pl-5">
-                <h4 className="evidence-stage-title text-white">Depois · Validar</h4>
-                <p className="evidence-stage-copy mt-3 text-white/68">Conduzir revisão técnica, coletar aceite formal, arquivar a evidência incontestável, dar retorno ao cliente e documentar melhorias.</p>
-              </div>
             </article>
           </section>
         </main>

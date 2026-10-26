@@ -57,7 +57,7 @@ export default function Slide09BU({ slide, onRegisterNavigation }) {
       <header className="w-full shrink-0">
         <span className="slide-standard-tag text-sm font-bold tracking-[.14em] uppercase text-white/65 mb-4">{slide.eyebrow}</span>
         <h2 className="text-4xl sm:text-5xl lg:text-[3.4rem] font-bold tracking-tight leading-[1.02] text-white">Uma conta acompanhada.<br />Uma equipe coordenada.</h2>
-        <p className="max-w-5xl mt-4 text-white/68">{slide.lead}</p>
+        <p className="max-w-5xl mt-4 text-white">{slide.lead}</p>
       </header>
 
       <main className="w-full flex-1 min-h-0 flex flex-col justify-center py-5 sm:py-6">

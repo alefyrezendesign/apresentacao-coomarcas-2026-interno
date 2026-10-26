@@ -45,7 +45,7 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
             <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white">
               {slide.headline}
             </h2>
-            <p className="text-xs sm:text-sm text-[#a3adb8] max-w-4xl">{slide.lead}</p>
+            <p className="text-xs sm:text-sm text-white max-w-4xl">{slide.lead}</p>
           </div>
         </div>
 
@@ -68,7 +68,7 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
             <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white">
               {slide.headline}
             </h2>
-            <p className="text-sm sm:text-base text-[#a3adb8] max-w-4xl mt-1">{slide.lead}</p>
+            <p className="text-sm sm:text-base text-white max-w-4xl mt-1">{slide.lead}</p>
           </div>
           <span className="text-4xl sm:text-6xl font-black text-white/10">03</span>
         </div>
@@ -92,7 +92,7 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
             <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white">
               {slide.headline}
             </h2>
-            <p className="text-sm sm:text-base text-[#a3adb8] max-w-4xl mt-1">{slide.lead}</p>
+            <p className="text-sm sm:text-base text-white max-w-4xl mt-1">{slide.lead}</p>
           </div>
           <span className="text-4xl sm:text-6xl font-black text-white/10">04</span>
         </div>
@@ -136,7 +136,7 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
           <h2 className="text-4xl sm:text-5xl lg:text-[3.4rem] font-bold tracking-tight leading-[1.02] text-white">
               A jornada é única. Os responsáveis mudam.
           </h2>
-          <p className="max-w-6xl mt-4 text-white/68">
+          <p className="max-w-6xl mt-4 text-white">
             Do primeiro contato à retenção contínua, cada transição entre equipes exige clareza de escopo, registro documental e aceite expresso.
           </p>
         </header>
@@ -221,7 +221,7 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
         <header className="w-full max-w-6xl mx-auto shrink-0 flex flex-col items-center text-center">
           <span className="slide-standard-tag text-sm font-bold tracking-[.14em] uppercase text-white/65 mb-4">{slide.eyebrow}</span>
           <h2 className="text-4xl sm:text-5xl lg:text-[3.4rem] font-bold tracking-tight leading-[1.02] text-white">Suporte Relacional é o guardião da jornada.</h2>
-          <p className="max-w-5xl mt-4 text-white/68">Atua de forma neutra e estratégica entre marcas, clientes e BUs: detecta riscos precoces, exige prazos e zela pela fidelização — sem executar tarefas técnicas.</p>
+          <p className="max-w-5xl mt-4 text-white">Atua de forma neutra e estratégica entre marcas, clientes e BUs: detecta riscos precoces, exige prazos e zela pela fidelização — sem executar tarefas técnicas.</p>
         </header>
 
         <main className="relative isolate w-full max-w-none mx-auto flex-1 min-h-0 flex flex-col justify-center py-4 sm:py-5">
@@ -276,7 +276,7 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
             <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white">
               Do CS generalista ao Key Account da BU.
             </h2>
-            <p className="text-sm sm:text-base text-[#a3adb8] max-w-4xl mt-1">
+            <p className="text-sm sm:text-base text-white max-w-4xl mt-1">
               Durante a virada, as profissionais de Customer Success evoluem de um modelo reativo e transversal para a liderança profunda e dedicada de contas dentro das BUs.
             </p>
           </div>
@@ -343,7 +343,7 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
             <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white">
               Excelência fecha o ciclo do erro.
             </h2>
-            <p className="text-sm sm:text-base text-[#a3adb8] max-w-4xl mt-1">
+            <p className="text-sm sm:text-base text-white max-w-4xl mt-1">
               Compliance, Qualidade, Auditoria e Suporte Técnico atuam em sincronia para eliminar retrabalhos e transformar falhas em procedimentos blindados.
             </p>
           </div>
@@ -390,7 +390,7 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
             <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white">
               Produtos especializados geram valor.
             </h2>
-            <p className="text-sm sm:text-base text-[#a3adb8] max-w-4xl mt-1">
+            <p className="text-sm sm:text-base text-white max-w-4xl mt-1">
               O ecossistema amplia a capacidade de atender demandas estratégicas dos clientes; a Audittar lidera essa geração de soluções de alta margem.
             </p>
           </div>
@@ -446,7 +446,7 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
             <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white">
               O trabalho precisa deixar evidência.
             </h2>
-            <p className="text-sm sm:text-base text-[#a3adb8] max-w-4xl mt-1">
+            <p className="text-sm sm:text-base text-white max-w-4xl mt-1">
               Todo colaborador deve conseguir responder com segurança: o que preciso entregar, para quem, até quando e onde está a comprovação registrada?
             </p>
           </div>
@@ -528,7 +528,7 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
             <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white">
               Migrar com segurança, não apenas trocar software.
             </h2>
-            <p className="text-sm sm:text-base text-[#a3adb8] max-w-4xl mt-1">
+            <p className="text-sm sm:text-base text-white max-w-4xl mt-1">
               O plano de virada assegura que as rotinas atuais não sofram qualquer oscilação enquanto o novo ecossistema Domínio é homologado com rigor por lote.
             </p>
           </div>
@@ -592,7 +592,7 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
             <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white">
               Ninguém muda sozinho.
             </h2>
-            <p className="text-sm sm:text-base text-[#a3adb8] max-w-4xl mt-1">
+            <p className="text-sm sm:text-base text-white max-w-4xl mt-1">
               A virada sustentável exige liderança presente, clareza de escopo, capacitação contínua e desenvolvimento das competências técnicas e comportamentais.
             </p>
           </div>
@@ -666,7 +666,7 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
             <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#0a0d12]">
               Expandir somente quando estiver pronto.
             </h2>
-            <p className="text-sm sm:text-base text-[#49525c] max-w-4xl mt-1">
+            <p className="text-sm sm:text-base text-[#0a0d12] max-w-4xl mt-1">
               A evolução da Coomarcas é orientada por critérios objetivos de prontidão técnica e maturidade operacional, e não por datas arbitrárias no calendário.
             </p>
           </div>
@@ -715,7 +715,7 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
             <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white">
               O que esperamos de cada um de nós?
             </h2>
-            <p className="text-sm sm:text-base text-[#a3adb8] max-w-4xl mt-1">
+            <p className="text-sm sm:text-base text-white max-w-4xl mt-1">
               A transformação de toda a empresa se constrói na integridade, zelo e disciplina com que cada colaborador cumpre seus compromissos diários.
             </p>
           </div>
@@ -800,7 +800,7 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
             </span>
           </div>
 
-          <p className="text-base sm:text-lg md:text-xl text-[#49525c] leading-relaxed max-w-3xl">
+          <p className="text-base sm:text-lg md:text-xl text-[#0a0d12] leading-relaxed max-w-3xl">
             Construído para valorizar o trabalho de cada colaborador, blindar nossos clientes e estabelecer o padrão definitivo de excelência contábil no Brasil.
           </p>
 
@@ -842,7 +842,7 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
           {slide.lead && (
             <p
               className={`text-sm sm:text-base max-w-4xl mt-1 ${
-                slide.isLight ? 'text-[#49525c]' : 'text-[#a3adb8]'
+                slide.isLight ? 'text-[#0a0d12]' : 'text-white'
               }`}
             >
               {slide.lead}

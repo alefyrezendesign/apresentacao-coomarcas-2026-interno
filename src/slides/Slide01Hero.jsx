@@ -65,7 +65,7 @@ export default function Slide01Hero({ slide, index, totalSlides = 21 }) {
         </h1>
 
         <motion.div {...reveal(2.16, 12)} className="max-w-3xl min-h-[4.2rem] flex items-center justify-center mb-12">
-          <p className="text-base sm:text-lg md:text-xl lg:text-[1.35rem] text-[#f1f5f9] leading-relaxed font-normal">{typedDescription}{!descriptionDone && <span className="inline-block w-1.5 h-5 bg-blue-400/90 ml-1.5 align-middle animate-pulse" />}</p>
+          <p className="text-base sm:text-lg md:text-xl lg:text-[1.35rem] text-white leading-relaxed font-normal">{typedDescription}{!descriptionDone && <span className="inline-block w-1.5 h-5 bg-blue-400/90 ml-1.5 align-middle animate-pulse" />}</p>
         </motion.div>
 
         <motion.div initial={reduceMotion ? false : { opacity: 0, y: 18, scale: 0.98 }} animate={descriptionDone ? { opacity: 0.9, y: 0, scale: 1 } : { opacity: 0, y: 18, scale: 0.98 }} transition={{ duration: reduceMotion ? 0 : 0.55, ease: [0.22, 0.8, 0.2, 1] }} className="flex justify-center items-center min-h-7">

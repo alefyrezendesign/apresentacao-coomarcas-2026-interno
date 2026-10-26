@@ -11,7 +11,7 @@ export default function Slide04Principios({ slide, onRegisterNavigation }) {
         <h2 className="max-w-5xl text-4xl sm:text-5xl lg:text-[3.4rem] font-bold tracking-tight text-white leading-[1.02]">
           {slide.headline}
         </h2>
-        <p className="max-w-5xl mt-4 text-base sm:text-lg lg:text-xl leading-relaxed text-white/68">
+        <p className="max-w-5xl mt-4 text-base sm:text-lg lg:text-xl leading-relaxed text-white">
           {slide.lead}
         </p>
       </header>

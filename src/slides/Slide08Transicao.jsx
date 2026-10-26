@@ -105,7 +105,7 @@ export default function Slide08Transicao({ slide, onRegisterNavigation }) {
         <h2 className="max-w-6xl text-4xl sm:text-5xl lg:text-[3.4rem] font-bold tracking-tight leading-[1.02] text-white">
           Duas trilhas acontecendo ao mesmo tempo.
         </h2>
-        <p className="max-w-5xl mt-4 text-white/68">
+        <p className="max-w-5xl mt-4 text-white">
           A transição é gradual e segura: os departamentos centrais permanecem consolidados, enquanto a BU Pets valida o modelo em formato de piloto (MVP).
         </p>
       </header>

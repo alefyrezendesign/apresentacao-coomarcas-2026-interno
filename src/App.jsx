@@ -45,7 +45,7 @@ const preloadedBackgrounds = new Set();
 function slideBackgroundVideo(slide) {
   if ([2, 4, 5, 8, 9].includes(slide.id)) return '/videos/bg-vd-liquid-escuro.mp4';
   if (slide.id === 1 || slide.id === 6) return '/videos/bg-vd-escuro.mp4';
-  if (slide.id === 7) return '/videos/bg-vd-escuro-pontos.mp4';
+  if ([7, 16].includes(slide.id)) return '/videos/bg-vd-escuro-pontos.mp4';
   if (slide.id === 10) return '/videos/bg-vd-azul.mp4';
   if ([14, 15].includes(slide.id)) return '/videos/bg-gradient-escuro.mp4';
   if (slide.id === 18) return '/videos/bg-onda-baixo.mp4';
@@ -59,7 +59,7 @@ function slideBackgroundVideo(slide) {
 
 function slideBackgroundOverlay(slide) {
   if ([2, 4, 5, 8, 9].includes(slide.id)) return 'liquid-overlay';
-  if (slide.id === 7) return 'soft-black points-overlay';
+  if ([7, 16].includes(slide.id)) return 'soft-black points-overlay';
   if (slide.id === 10) return 'soft-blue';
   if ([14, 15].includes(slide.id)) return 'soft-black';
   if (slide.id === 20) return 'lines-overlay';

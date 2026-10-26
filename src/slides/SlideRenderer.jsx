@@ -225,7 +225,7 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
         </header>
 
         <main className="relative isolate w-full max-w-none mx-auto flex-1 min-h-0 flex flex-col justify-center py-4 sm:py-5">
-          <img src="/videos/globo.gif" alt="" className="pointer-events-none absolute z-0 left-1/2 top-[56%] h-60 w-60 sm:h-72 sm:w-72 -translate-x-1/2 -translate-y-1/2 object-contain" />
+          <img src="/videos/globo.gif" alt="" className="pointer-events-none absolute z-0 left-1/2 top-[30%] h-60 w-60 sm:h-72 sm:w-72 -translate-x-1/2 -translate-y-1/2 object-contain" />
           <section className="relative z-10 mx-auto w-full max-w-3xl h-[17rem] sm:h-[18rem]" aria-label="Áreas conectadas ao suporte relacional">
             {satellites.map((sat, index) => (
               <span key={sat} className={`absolute z-10 inline-flex items-center px-3 py-2 bg-white/[0.045] border border-white/16 text-[.66rem] sm:text-[.7rem] font-bold tracking-[.1em] text-white/76 whitespace-nowrap ${satellitePositions[index]}`}>

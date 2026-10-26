@@ -2,13 +2,18 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 
-export default function ContentAccordion({ items, tone = 'dark', columns = 1, autoRevealFirst = true, onRegisterNavigation }) {
+export default function ContentAccordion({ items, tone = 'dark', columns = 1, autoRevealFirst = true, expandAll = false, onRegisterNavigation }) {
   const [expandedIndexes, setExpandedIndexes] = useState([]);
   const reduceMotion = useReducedMotion();
   const didInteract = useRef(false);
   const activeStepRef = useRef(-1);
   const isLight = tone === 'light';
   const usesPairedPanels = columns === 2;
+  const layoutClass = columns === 1
+    ? 'flex flex-col gap-3'
+    : columns === 2
+      ? 'grid grid-cols-1 md:grid-cols-2 items-start gap-3'
+      : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-stretch auto-rows-fr gap-3';
   const steps = useMemo(() => {
     if (!usesPairedPanels) return items.map((_, index) => [index]);
     return Array.from({ length: Math.ceil(items.length / 2) }, (_, step) => {
@@ -16,6 +21,7 @@ export default function ContentAccordion({ items, tone = 'dark', columns = 1, au
       return [first, first + 1].filter((index) => index < items.length);
     });
   }, [items, usesPairedPanels]);
+  const allIndexes = useMemo(() => items.map((_, index) => index), [items]);
 
   const activateStep = useCallback((step) => {
     activeStepRef.current = step;
@@ -23,23 +29,31 @@ export default function ContentAccordion({ items, tone = 'dark', columns = 1, au
   }, [steps]);
 
   const advanceStep = useCallback(() => {
+    if (expandAll) return false;
     const nextStep = activeStepRef.current + 1;
     if (nextStep >= steps.length) return false;
     didInteract.current = true;
     activateStep(nextStep);
     return true;
-  }, [activateStep, steps.length]);
+  }, [activateStep, expandAll, steps.length]);
 
   const retreatStep = useCallback(() => {
+    if (expandAll) return false;
     const previousStep = activeStepRef.current - 1;
     if (previousStep < 0) return false;
     didInteract.current = true;
     activateStep(previousStep);
     return true;
-  }, [activateStep]);
+  }, [activateStep, expandAll]);
 
   useEffect(() => {
     didInteract.current = false;
+    if (expandAll) {
+      activeStepRef.current = steps.length;
+      setExpandedIndexes(allIndexes);
+      return undefined;
+    }
+
     activateStep(-1);
 
     if (reduceMotion || !autoRevealFirst || !items.length) return undefined;
@@ -51,7 +65,7 @@ export default function ContentAccordion({ items, tone = 'dark', columns = 1, au
     }, 680);
 
     return () => window.clearTimeout(revealTimer);
-  }, [activateStep, items.length, reduceMotion, autoRevealFirst]);
+  }, [activateStep, allIndexes, autoRevealFirst, expandAll, items.length, reduceMotion, steps.length]);
 
   useEffect(() => {
     if (!onRegisterNavigation) return undefined;
@@ -60,14 +74,14 @@ export default function ContentAccordion({ items, tone = 'dark', columns = 1, au
   }, [advanceStep, onRegisterNavigation, retreatStep]);
 
   return (
-    <div className={columns === 2 ? 'grid grid-cols-1 md:grid-cols-2 items-start gap-3' : 'flex flex-col gap-3'}>
+    <div className={layoutClass}>
       {items.map((item, index) => {
         const isExpanded = expandedIndexes.includes(index);
         return (
           <section
             key={item.title}
-            className={`overflow-hidden border transition-[background-color,border-color] duration-300 ${isLight
-              ? isExpanded ? 'bg-white border-black/40' : 'bg-white/55 border-black/15'
+            className={`${columns > 2 ? 'h-full ' : ''}overflow-hidden border transition-[background-color,border-color] duration-300 ${isLight
+              ? isExpanded ? 'bg-white/50 border-black/40' : 'bg-white/55 border-black/15'
               : isExpanded ? 'bg-white/[0.08] border-white/40' : 'bg-black/15 border-white/15'}`}
           >
             <button

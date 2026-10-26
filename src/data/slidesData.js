@@ -250,7 +250,7 @@ export const slidesData = [
     eyebrow: "CRONOGRAMA DE EVOLUÇÃO",
     headline: "Expandir somente quando estiver pronto.",
     lead: "A evolução da Coomarcas é orientada por critérios objetivos de prontidão técnica e maturidade operacional, e não por datas arbitrárias no calendário.",
-    isLight: false
+    isLight: true
   },
   {
     id: 20,

@@ -5,6 +5,7 @@ import {
   BadgeCheck,
   ClipboardCheck,
   ChevronDown,
+  Flag,
   Headphones,
   Map,
   Play,
@@ -96,7 +97,7 @@ export default function Slide08Transicao({ slide, onRegisterNavigation }) {
   }, [advance, onRegisterNavigation, retreat]);
 
   return (
-    <div className="w-full h-full flex flex-col px-8 sm:px-14 lg:px-24 pt-16 sm:pt-20 pb-16 bg-[#0a0d12] text-[#f1f4f8] select-none">
+    <div className="w-full h-full flex flex-col px-8 sm:px-14 lg:px-24 pt-12 sm:pt-14 pb-10 sm:pb-12 bg-[#0a0d12] text-[#f1f4f8] select-none">
       <header className="w-full max-w-6xl mx-auto shrink-0">
         <span className="slide-standard-tag text-sm font-bold tracking-[.14em] uppercase text-white/65 mb-4">
           {slide.eyebrow}
@@ -109,7 +110,7 @@ export default function Slide08Transicao({ slide, onRegisterNavigation }) {
         </p>
       </header>
 
-      <div className="w-full max-w-6xl mx-auto flex-1 min-h-0 flex flex-col justify-center py-6">
+      <div className="w-full max-w-6xl mx-auto flex-1 min-h-0 flex flex-col justify-start py-4">
         <div className="flex flex-col gap-3">
           {tracks.map((track, index) => {
             const isOpen = openIndex === index;
@@ -125,12 +126,12 @@ export default function Slide08Transicao({ slide, onRegisterNavigation }) {
                     setOpen(openIndexRef.current === index ? -1 : index);
                   }}
                   aria-expanded={isOpen}
-                  className="w-full min-h-[5.15rem] px-5 py-4 sm:px-7 flex items-center gap-5 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-white"
+                  className="w-full min-h-[4.75rem] px-5 py-4 sm:px-7 flex items-center gap-5 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-white"
                 >
                   <span className="w-9 shrink-0 font-mono text-sm font-bold tracking-wide text-white/42">{String(index + 1).padStart(2, '0')}</span>
                   <div className="min-w-0 flex-1">
                     <span className="block text-xs font-bold tracking-[.12em] uppercase text-white/52">{track.label}</span>
-                    <h3 className="mt-1 text-xl sm:text-2xl font-semibold tracking-tight leading-tight text-white">{track.title}</h3>
+                    <h3 className="mt-1.5 text-xl sm:text-2xl font-semibold tracking-tight leading-tight text-white">{track.title}</h3>
                   </div>
                   <ChevronDown className={`w-5 h-5 shrink-0 text-white/58 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
                 </button>
@@ -145,21 +146,29 @@ export default function Slide08Transicao({ slide, onRegisterNavigation }) {
                       className="overflow-hidden"
                     >
                       <div className="px-5 pb-6 sm:px-7 sm:pb-7">
-                        <div className="ml-[3.5rem] pt-1 border-t border-white/14">
-                          <p className="mt-4 max-w-5xl text-white/72">{track.summary}</p>
+                        <div className="ml-[3.5rem] pt-2">
+                          <p className="max-w-5xl text-white/72">{track.summary}</p>
 
-                          <div className="mt-5 grid grid-cols-5 border-y border-white/14 divide-x divide-white/14">
-                            {track.steps.map(({ label, Icon }) => (
-                              <div key={label} className="min-w-0 px-2 py-3 flex flex-col items-center justify-center gap-2 text-center">
-                                <Icon className="w-4 h-4 text-white/72" strokeWidth={1.65} aria-hidden="true" />
-                                <span className="text-[.72rem] font-semibold leading-tight text-white/90 whitespace-nowrap">{label}</span>
-                              </div>
+                          <ol className="mt-6 flex items-center justify-between gap-3" aria-label="Etapas da trilha">
+                            {track.steps.map(({ label, Icon }, stepIndex) => (
+                              <React.Fragment key={label}>
+                                <li className="min-w-0 flex items-center gap-2.5 text-left">
+                                  <Icon className="w-[1.1rem] h-[1.1rem] shrink-0 text-white/70" strokeWidth={1.65} aria-hidden="true" />
+                                  <span className="text-base font-semibold leading-tight text-white/90 whitespace-nowrap">{label}</span>
+                                </li>
+                                {stepIndex < track.steps.length - 1 && <ArrowRight className="w-4 h-4 shrink-0 text-white/30" strokeWidth={1.5} aria-hidden="true" />}
+                              </React.Fragment>
                             ))}
-                          </div>
+                          </ol>
 
-                          <div className="mt-5 pt-5 border-t border-white/14 grid grid-cols-1 md:grid-cols-3 gap-4 text-white/72">
-                            {track.points.map((point) => <p key={point} className="!text-[.98rem] leading-snug">{point}</p>)}
-                          </div>
+                          <ul className="mt-7 max-w-5xl space-y-2.5 text-white/72">
+                            {track.points.map((point) => (
+                              <li key={point} className="flex items-start gap-2.5 !text-[.98rem] leading-snug">
+                                <span className="shrink-0 text-white/62" aria-hidden="true">{point.slice(0, 1)}</span>
+                                <span>{point.slice(1).trimStart()}</span>
+                              </li>
+                            ))}
+                          </ul>
                         </div>
                       </div>
                     </motion.div>
@@ -170,9 +179,12 @@ export default function Slide08Transicao({ slide, onRegisterNavigation }) {
           })}
         </div>
 
-        <footer className="mt-4 px-4 py-3 border border-white/16 bg-white/[0.035] flex items-center gap-4 text-[#d5dbe4]">
-          <span className="shrink-0 px-3 py-1 bg-white text-black font-bold text-xs uppercase tracking-wider">GATE DE LIBERAÇÃO</span>
-          <span className="text-sm font-medium">SETOR CENTRALIZADO ➔ PRONTIDÃO COMPROVADA ➔ HOMOLOGAÇÃO DE SISTEMAS ➔ BU OFICIALMENTE LIBERADA</span>
+        <footer className="w-full mt-6 flex items-center gap-4 text-[#d5dbe4]">
+          <span className="inline-flex shrink-0 items-center gap-2 px-3 py-2 border border-[#79b5ff]/35 bg-[#4b9dff]/[.10] text-[#8ac0ff] font-bold text-xs uppercase tracking-[.12em]">
+            <Flag className="w-3.5 h-3.5" strokeWidth={1.7} aria-hidden="true" />
+            GATE DE LIBERAÇÃO
+          </span>
+          <span className="text-sm font-medium text-white/82">SETOR CENTRALIZADO ➔ PRONTIDÃO COMPROVADA ➔ HOMOLOGAÇÃO DE SISTEMAS ➔ BU OFICIALMENTE LIBERADA</span>
         </footer>
       </div>
     </div>

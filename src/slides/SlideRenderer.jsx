@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle2, AlertCircle, ArrowRight, ShieldCheck, Sparkles, Layers, Zap, Clock, Users, Database, Award } from 'lucide-react';
+import { CheckCircle2, AlertCircle, ArrowRight, ShieldCheck, Sparkles, Layers, Zap, Clock, Users, Database, Award, Landmark, Target } from 'lucide-react';
 import OrganogramaInteractive from '../components/OrganogramaInteractive';
 import Slide01Hero from './Slide01Hero';
 import Slide02Transformacao from './Slide02Transformacao';
@@ -145,7 +145,7 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
           {steps.map((st) => {
             const Icon = st.Icon;
             return (
-            <article key={st.num} className="relative min-h-[10.5rem] p-5 sm:p-6 bg-white/[0.035] border border-white/15 hover:border-white/28 transition-colors flex flex-col justify-between">
+            <article key={st.num} className="relative min-h-[10.5rem] p-5 sm:p-6 bg-black/[.28] border border-white/20 hover:border-white/34 transition-colors flex flex-col justify-between">
               <div>
                 <span className="text-xl font-black font-mono text-white/40 block mb-3">{st.num}</span>
                 <h4 className="text-xl font-semibold tracking-tight leading-tight text-white">{st.title}</h4>
@@ -157,8 +157,11 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
           })}
         </div>
 
-        <footer className="w-full max-w-6xl mx-auto shrink-0 flex items-start gap-4 pt-1 text-[#d5dbe4]">
-          <span className="shrink-0 font-bold text-xs uppercase tracking-[.14em] text-white/60">GOVERNANÇA</span>
+        <footer className="w-full max-w-6xl mx-auto shrink-0 flex items-center gap-4 pt-1 text-[#d5dbe4]">
+          <span className="inline-flex shrink-0 items-center gap-2 px-3 py-2 border border-[#89a9dc]/40 bg-[#739ee5]/[.11] text-[#9bc1ff] font-bold text-xs uppercase tracking-[.12em]">
+            <Landmark className="w-3.5 h-3.5" strokeWidth={1.7} aria-hidden="true" />
+            GOVERNANÇA
+          </span>
           <span className="text-sm sm:text-base leading-snug text-white/76">Nenhum cliente é considerado transferido até que a área receptora confirme o recebimento formal e valide os cadastros e dados.</span>
         </footer>
       </div>
@@ -208,72 +211,55 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
   // 10. SLIDE 12: 08 / SUPORTE RELACIONAL
   if (slide.id === 12) {
     const satellites = ["COMERCIAL", "ONBOARDING", "BU / KA", "OPERAÇÃO TÉCNICA", "ATENDIMENTO", "QUALIDADE", "AUDITORIA", "FINANCEIRO"];
+    const satellitePositions = [
+      'left-[7%] top-[19%]', 'left-[28%] top-[2%]', 'right-[28%] top-[2%]', 'right-[7%] top-[19%]',
+      'left-[7%] bottom-[19%]', 'left-[28%] bottom-[2%]', 'right-[28%] bottom-[2%]', 'right-[7%] bottom-[19%]',
+    ];
 
     return (
-      <div className="w-full h-full flex flex-col justify-between py-6 px-8 md:px-14 lg:px-20 bg-[#0a0d12] text-[#f1f4f8] select-none">
-        <div className="flex justify-between items-start mb-3">
-          <div>
-            <span className="inline-block text-xs font-bold tracking-widest uppercase bg-white/5 border border-white/15 px-4 py-1 rounded-full text-[#d5dbe4] mb-2">
-              {slide.eyebrow}
-            </span>
-            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white">
-              Suporte Relacional é o guardião da jornada.
-            </h2>
-            <p className="text-sm sm:text-base text-[#a3adb8] max-w-4xl mt-1">
-              Atua de forma neutra e estratégica entre marcas, clientes e BUs: detecta riscos precoces, exige prazos e zela pela fidelização — sem executar tarefas técnicas.
-            </p>
-          </div>
-          <span className="text-4xl sm:text-6xl font-black text-white/10">08</span>
-        </div>
+      <div className="w-full h-full flex flex-col px-8 sm:px-14 lg:px-24 pt-12 sm:pt-14 pb-10 sm:pb-12 bg-[#0a0d12] text-[#f1f4f8] select-none">
+        <header className="w-full max-w-6xl mx-auto shrink-0 flex flex-col items-center text-center">
+          <span className="slide-standard-tag text-sm font-bold tracking-[.14em] uppercase text-white/65 mb-4">{slide.eyebrow}</span>
+          <h2 className="text-4xl sm:text-5xl lg:text-[3.4rem] font-bold tracking-tight leading-[1.02] text-white">Suporte Relacional é o guardião da jornada.</h2>
+          <p className="max-w-5xl mt-4 text-white/68">Atua de forma neutra e estratégica entre marcas, clientes e BUs: detecta riscos precoces, exige prazos e zela pela fidelização — sem executar tarefas técnicas.</p>
+        </header>
 
-        <div className="flex-1 min-h-0 flex flex-col justify-around">
-          {/* Hub & Satellites */}
-          <div className="flex flex-col md:flex-row items-center justify-center gap-6 my-2">
-            <div className="p-5 rounded-2xl bg-white text-black text-center font-black shadow-2xl border-2 border-white">
-              <span className="text-xl block">SUPORTE RELACIONAL</span>
-              <span className="text-xs font-medium text-neutral-600 block mt-1">Jornada · Risco · Retenção</span>
-            </div>
-            <div className="flex flex-wrap gap-2 max-w-xl justify-center">
-              {satellites.map((sat, i) => (
-                <span key={i} className="px-3.5 py-1.5 rounded-xl bg-white/10 border border-white/20 text-xs font-bold text-white">
-                  {sat}
-                </span>
-              ))}
-            </div>
-          </div>
+        <main className="w-full max-w-none mx-auto flex-1 min-h-0 flex flex-col justify-center py-4 sm:py-5">
+          <section className="relative isolate mx-auto w-full max-w-3xl h-[17rem] sm:h-[18rem]" aria-label="Áreas conectadas ao suporte relacional">
+            <img src="/videos/globo.gif" alt="" className="pointer-events-none absolute z-0 left-1/2 top-1/2 h-60 w-60 sm:h-72 sm:w-72 -translate-x-1/2 -translate-y-1/2 object-contain" />
+            {satellites.map((sat, index) => (
+              <span key={sat} className={`absolute z-10 inline-flex items-center px-3 py-2 bg-white/[0.045] border border-white/16 text-[.66rem] sm:text-[.7rem] font-bold tracking-[.1em] text-white/76 whitespace-nowrap ${satellitePositions[index]}`}>
+                {sat}
+              </span>
+            ))}
+          </section>
 
-          {/* 3 Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-4 rounded-xl bg-white/5 border border-white/15">
-              <span className="text-xs font-bold text-[#a3adb8] block mb-1">PREVENIR</span>
-              <h4 className="text-lg font-bold text-white mb-1">Saúde da carteira</h4>
-              <p className="text-xs text-[#d5dbe4] leading-relaxed">
-                Segmentação da carteira (Proteção, Performance e Evolução), Health Score ativo e detecção precoce de atritos.
-              </p>
-            </div>
-            <div className="p-4 rounded-xl bg-white/5 border border-white/15">
-              <span className="text-xs font-bold text-[#a3adb8] block mb-1">ACOMPANHAR</span>
-              <h4 className="text-lg font-bold text-white mb-1">Cobrança e escalonamento</h4>
-              <p className="text-xs text-[#d5dbe4] leading-relaxed">
-                Cobrança de causa-raiz, plano de ação corretivo, responsável, prazo e comprovação documental das áreas.
-              </p>
-            </div>
-            <div className="p-4 rounded-xl bg-white/5 border border-white/15">
-              <span className="text-xs font-bold text-[#a3adb8] block mb-1">APRENDER</span>
-              <h4 className="text-lg font-bold text-white mb-1">Voz do Cliente</h4>
-              <p className="text-xs text-[#d5dbe4] leading-relaxed">
-                Tratamento estruturado de reclamações, medição de NPS, análise de reincidências e blindagem contra churn.
-              </p>
-            </div>
-          </div>
-        </div>
+          <section className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 mt-1">
+            <article className="min-h-[8.75rem] p-5 sm:px-6 sm:py-5 bg-white/[0.035] border border-white/15 flex flex-col">
+              <span className="inline-flex w-fit items-center gap-1.5 rounded-full border border-[#76d8ff]/35 bg-[#199bd0]/[.10] px-2.5 py-1 text-[.65rem] font-bold tracking-[.1em] uppercase text-[#a4e5ff] mb-3"><ShieldCheck className="size-3" strokeWidth={2} aria-hidden="true" />PREVENIR</span>
+              <h4 className="text-xl font-semibold text-white leading-tight">Saúde da carteira</h4>
+              <p className="mt-3 text-[.92rem] leading-[1.45] text-white/68 font-light">Segmentação da carteira (Proteção, Performance e Evolução), Health Score ativo e detecção precoce de atritos.</p>
+            </article>
+            <article className="min-h-[8.75rem] p-5 sm:px-6 sm:py-5 bg-white/[0.035] border border-white/15 flex flex-col">
+              <span className="inline-flex w-fit items-center gap-1.5 rounded-full border border-[#c3a4f0]/35 bg-[#9e7cd6]/[.10] px-2.5 py-1 text-[.65rem] font-bold tracking-[.1em] uppercase text-[#d9c9ff] mb-3"><Clock className="size-3" strokeWidth={2} aria-hidden="true" />ACOMPANHAR</span>
+              <h4 className="text-xl font-semibold text-white leading-tight">Cobrança e escalonamento</h4>
+              <p className="mt-3 text-[.92rem] leading-[1.45] text-white/68 font-light">Cobrança de causa-raiz, plano de ação corretivo, responsável, prazo e comprovação documental das áreas.</p>
+            </article>
+            <article className="min-h-[8.75rem] p-5 sm:px-6 sm:py-5 bg-white/[0.035] border border-white/15 flex flex-col">
+              <span className="inline-flex w-fit items-center gap-1.5 rounded-full border border-[#e4bd72]/35 bg-[#b9821c]/[.10] px-2.5 py-1 text-[.65rem] font-bold tracking-[.1em] uppercase text-[#f2d28e] mb-3"><Sparkles className="size-3" strokeWidth={2} aria-hidden="true" />APRENDER</span>
+              <h4 className="text-xl font-semibold text-white leading-tight">Voz do Cliente</h4>
+              <p className="mt-3 text-[.92rem] leading-[1.45] text-white/68 font-light">Tratamento estruturado de reclamações, medição de NPS, análise de reincidências e blindagem contra churn.</p>
+            </article>
+          </section>
+        </main>
 
-        <div className="mt-4 p-3.5 rounded-xl bg-white/5 border border-white/15 flex items-center gap-3 text-sm text-[#d5dbe4]">
-          <span className="px-3 py-1 rounded-md bg-white text-black font-bold text-xs uppercase tracking-wider shrink-0">
+        <footer className="w-full max-w-6xl mx-auto shrink-0 mt-2 flex items-center gap-4 text-sm text-[#d5dbe4]">
+          <span className="inline-flex shrink-0 items-center gap-2 px-3 py-2 border border-[#c3a4f0]/40 bg-[#9e7cd6]/[.10] text-[#d0b9ff] font-bold text-xs uppercase tracking-[.12em]">
+            <Target className="w-3.5 h-3.5" strokeWidth={1.7} aria-hidden="true" />
             PAPEL ESTRATÉGICO
           </span>
-          <span>O Suporte Relacional não executa lançamentos fiscais nem folha; sua missão é proteger o cliente e cobrar rigor de entrega de toda a organização.</span>
-        </div>
+          <span className="font-light text-white/74">O Suporte Relacional não executa lançamentos fiscais nem folha; sua missão é proteger o cliente e cobrar rigor de entrega de toda a organização.</span>
+        </footer>
       </div>
     );
   }
@@ -297,14 +283,14 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
           <span className="text-4xl sm:text-6xl font-black text-white/10">09</span>
         </div>
 
-        <div className="flex-1 min-h-0 grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch my-auto">
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/15 backdrop-blur-xl flex flex-col justify-between">
+        <div className="flex-1 min-h-0 grid grid-cols-1 md:grid-cols-2 gap-5 items-stretch my-auto">
+          <div className="relative p-6 bg-white/[0.045] border border-white/15 flex flex-col justify-between">
             <div>
               <span className="text-xs font-bold tracking-wider text-[#a3adb8] uppercase block mb-1">MODELO ATUAL</span>
-              <h3 className="text-2xl font-bold text-white mb-2">CS Generalista (Transversal)</h3>
-              <p className="text-sm text-[#d5dbe4] mb-4">Atuação dispersa cobrindo toda a carteira da empresa de forma reativa.</p>
+              <h3 className="text-xl font-semibold text-white mb-2">CS Generalista (Transversal)</h3>
+              <p className="text-[.9rem] leading-[1.45] text-[#d5dbe4] mb-4">Atuação dispersa cobrindo toda a carteira da empresa de forma reativa.</p>
             </div>
-            <ul className="space-y-2 text-sm text-[#a3adb8]">
+            <ul className="space-y-2 text-[.86rem] leading-[1.45] text-[#a3adb8]">
               <li>• Apagar incêndios e encaminhar solicitações pontuais às áreas.</li>
               <li>• Contato superficial com os contratos e peculiaridades técnicas.</li>
               <li>• Alertas de cancelamento percebidos após desgaste avançado.</li>
@@ -312,13 +298,13 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
             </ul>
           </div>
 
-          <div className="p-6 rounded-2xl bg-white/10 border-2 border-white/30 backdrop-blur-xl flex flex-col justify-between">
+          <div className="relative p-6 bg-[#1688d3]/[.12] border border-[#4ca8df]/55 flex flex-col justify-between">
             <div>
               <span className="text-xs font-bold tracking-wider text-white uppercase block mb-1">MODELO FUTURO DA VIRADA</span>
-              <h3 className="text-2xl font-bold text-white mb-2">Key Account (Gestora da BU)</h3>
-              <p className="text-sm text-[#d5dbe4] mb-4">Liderança direta da carteira do nicho com autoridade e conhecimento do cliente.</p>
+              <h3 className="text-xl font-semibold text-white mb-2">Key Account (Gestora da BU)</h3>
+              <p className="text-[.9rem] leading-[1.45] text-[#d5dbe4] mb-4">Liderança direta da carteira do nicho com autoridade e conhecimento do cliente.</p>
             </div>
-            <ul className="space-y-2 text-sm text-white">
+            <ul className="space-y-2 text-[.86rem] leading-[1.45] text-white/88">
               <li>✓ Aceite formal da carteira e domínio profundo do contrato.</li>
               <li>✓ Mobilização direta de Atendimento, Fiscal, Contábil e DP da BU.</li>
               <li>✓ Gestão preventiva de prazos, pendências e devolutivas pontuais.</li>
@@ -327,11 +313,12 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
           </div>
         </div>
 
-        <div className="mt-4 p-3.5 rounded-xl bg-white/5 border border-white/15 flex items-center gap-3 text-sm text-[#d5dbe4]">
-          <span className="px-3 py-1 rounded-md bg-white text-black font-bold text-xs uppercase tracking-wider shrink-0">
+        <div className="mt-4 flex items-start gap-3 text-sm text-[#d5dbe4]">
+          <span className="inline-flex shrink-0 items-center gap-2 px-3 py-2 border border-[#e1b56c]/45 bg-[#b9821c]/[.10] text-[#f2d28e] font-bold text-xs uppercase tracking-[.12em]">
+            <AlertCircle className="w-3.5 h-3.5" strokeWidth={1.8} aria-hidden="true" />
             OBSERVAÇÃO CRÍTICA
           </span>
-          <span>A governança transversal do Suporte Relacional permanece ativa e independente para auditar a jornada, mesmo após a alocação como KAs.</span>
+          <span className="pt-1.5 text-white/74 font-light">A governança transversal do Suporte Relacional permanece ativa e independente para auditar a jornada, mesmo após a alocação como KAs.</span>
         </div>
       </div>
     );
@@ -340,10 +327,10 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
   // 12. SLIDE 14: 10 / CICLO DA EXCELÊNCIA
   if (slide.id === 14) {
     const pil = [
-      { tag: "REGRAS", title: "Compliance", desc: "Normas, POPs, alçadas de decisão e conformidade legal em todas as frentes." },
-      { tag: "PADRÃO", title: "Qualidade", desc: "Verificação ativa de conformidade nas entregas, conferência de critérios e detecção de desvios." },
-      { tag: "EVIDÊNCIA", title: "Auditoria", desc: "Investigação de causa-raiz, análise de reincidências e teste de eficácia real das correções." },
-      { tag: "APRENDIZADO", title: "Suporte Técnico", desc: "Mentoria especializada para Fiscal, Contábil e DP, convertendo dúvidas em treinamentos." },
+      { tag: "REGRAS", title: "Compliance", desc: "Normas, POPs, alçadas de decisão e conformidade legal em todas as frentes.", Icon: ShieldCheck },
+      { tag: "PADRÃO", title: "Qualidade", desc: "Verificação ativa de conformidade nas entregas, conferência de critérios e detecção de desvios.", Icon: CheckCircle2 },
+      { tag: "EVIDÊNCIA", title: "Auditoria", desc: "Investigação de causa-raiz, análise de reincidências e teste de eficácia real das correções.", Icon: AlertCircle },
+      { tag: "APRENDIZADO", title: "Suporte Técnico", desc: "Mentoria especializada para Fiscal, Contábil e DP, convertendo dúvidas em treinamentos.", Icon: Sparkles },
     ];
 
     return (
@@ -364,17 +351,21 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-auto">
-          {pil.map((p, i) => (
-            <div key={i} className="p-5 rounded-xl bg-white/5 border border-white/15 hover:border-white/30 transition-all">
-              <span className="text-xs font-bold text-[#a3adb8] uppercase block mb-1">{p.tag}</span>
-              <h4 className="text-xl font-bold text-white mb-2">{p.title}</h4>
-              <p className="text-xs sm:text-sm text-[#d5dbe4] leading-relaxed">{p.desc}</p>
+          {pil.map((p, i) => {
+            const Icon = p.Icon;
+            return (
+            <div key={i} className="relative p-5 bg-white/[0.045] border border-white/15 hover:border-white/30 transition-colors">
+              <Icon className="absolute right-5 top-5 size-4 text-white/45" strokeWidth={1.6} aria-hidden="true" />
+              <span className="text-[.68rem] font-bold tracking-[.12em] text-[#a3adb8] uppercase block mb-2">{p.tag}</span>
+              <h4 className="text-lg font-semibold text-white mb-2">{p.title}</h4>
+              <p className="text-[.86rem] text-[#d5dbe4]/82 leading-[1.45] font-light">{p.desc}</p>
             </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Looping Cycle Banner */}
-        <div className="p-3.5 rounded-xl bg-white/10 border border-white/20 flex flex-wrap items-center justify-around text-xs md:text-sm font-bold text-white tracking-wider">
+        <div className="p-3.5 bg-white/[0.045] border border-white/15 flex flex-wrap items-center justify-around text-xs md:text-sm font-semibold text-white/88 tracking-wider">
           <span>01 DESVIO DETECTADO</span>
           <ArrowRight className="w-4 h-4 text-white" />
           <span>02 CORREÇÃO TÉCNICA</span>
@@ -406,37 +397,38 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
           <span className="text-4xl sm:text-6xl font-black text-white/10">11</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-auto">
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/15">
-            <span className="text-xs font-bold text-[#a3adb8] uppercase block mb-1">SOLUÇÕES FISCAIS</span>
-            <h4 className="text-2xl font-bold text-white mb-2">Soluções Tributárias</h4>
-            <p className="text-sm text-[#d5dbe4] leading-relaxed">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 my-auto">
+          <div className="p-6 bg-white/[0.045] border border-white/15">
+            <span className="text-[.68rem] font-bold tracking-[.12em] text-[#a3adb8] uppercase block mb-2">SOLUÇÕES FISCAIS</span>
+            <h4 className="text-xl font-semibold text-white mb-2">Soluções Tributárias</h4>
+            <p className="text-[.9rem] text-[#d5dbe4]/82 font-light leading-[1.5]">
               Planejamento tributário estratégico, recuperação administrativa de créditos, apuração de benefícios fiscais e compensações legais com segurança jurídica.
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/15">
-            <span className="text-xs font-bold text-[#a3adb8] uppercase block mb-1">CONFIANÇA & DADOS</span>
-            <h4 className="text-2xl font-bold text-white mb-2">Diagnóstico e Revisão</h4>
-            <p className="text-sm text-[#d5dbe4] leading-relaxed">
+          <div className="p-6 bg-white/[0.045] border border-white/15">
+            <span className="text-[.68rem] font-bold tracking-[.12em] text-[#a3adb8] uppercase block mb-2">CONFIANÇA & DADOS</span>
+            <h4 className="text-xl font-semibold text-white mb-2">Diagnóstico e Revisão</h4>
+            <p className="text-[.9rem] text-[#d5dbe4]/82 font-light leading-[1.5]">
               Auditoria contábil e tributária independente, revisão cadastral e parametrização de produtos, saneamento de bases e modelagem de precificação.
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/15">
-            <span className="text-xs font-bold text-[#a3adb8] uppercase block mb-1">ALTA RENTABILIDADE</span>
-            <h4 className="text-2xl font-bold text-white mb-2">Estruturação Societária</h4>
-            <p className="text-sm text-[#d5dbe4] leading-relaxed">
+          <div className="p-6 bg-white/[0.045] border border-white/15">
+            <span className="text-[.68rem] font-bold tracking-[.12em] text-[#a3adb8] uppercase block mb-2">ALTA RENTABILIDADE</span>
+            <h4 className="text-xl font-semibold text-white mb-2">Estruturação Societária</h4>
+            <p className="text-[.9rem] text-[#d5dbe4]/82 font-light leading-[1.5]">
               Planejamento de holdings patrimoniais e operacionais, reorganizações societárias, sucessão familiar, governança e antecipação estratégica de recebíveis.
             </p>
           </div>
         </div>
 
-        <div className="mt-4 p-3.5 rounded-xl bg-white/5 border border-white/15 flex items-center gap-3 text-sm text-[#d5dbe4]">
-          <span className="px-3 py-1 rounded-md bg-white text-black font-bold text-xs uppercase tracking-wider shrink-0">
+        <div className="mt-4 flex items-start gap-3 text-sm text-[#d5dbe4]">
+          <span className="inline-flex shrink-0 items-center gap-2 px-3 py-2 border border-[#76d8ff]/40 bg-[#199bd0]/[.10] text-[#a4e5ff] font-bold text-xs uppercase tracking-[.12em]">
+            <ShieldCheck className="w-3.5 h-3.5" strokeWidth={1.8} aria-hidden="true" />
             GATE DE EXECUÇÃO
           </span>
-          <span><b>Oportunidade não é autorização de execução:</b> O Comercial contrata formalmente; os especialistas técnicos validam a viabilidade e entregam estritamente o escopo aprovado.</span>
+          <span className="pt-1.5 text-white/74 font-light"><b className="font-semibold text-white/90">Oportunidade não é autorização de execução:</b> O Comercial contrata formalmente; os especialistas técnicos validam a viabilidade e entregam estritamente o escopo aprovado.</span>
         </div>
       </div>
     );
@@ -461,50 +453,66 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
           <span className="text-4xl sm:text-6xl font-black text-white/10">12</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-auto">
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/15">
-            <span className="text-xs font-bold text-[#a3adb8] uppercase block mb-1">ETAPA 01</span>
-            <h4 className="text-2xl font-bold text-white mb-2">Antes · Preparar</h4>
-            <p className="text-sm text-[#d5dbe4] leading-relaxed">
-              Analisar carteira, mapear dependências, confirmar prazos, identificar riscos e certificar executor, revisor e substituto antes de iniciar.
-            </p>
-          </div>
+        <main className="my-auto flex flex-col gap-9">
+          <section className="grid grid-cols-2 md:grid-cols-4 border-y border-white/20" aria-label="Evidências mínimas de cada entrega">
+            <article className="min-h-[7rem] p-4 sm:p-5 border-r border-b md:border-b-0 border-white/14">
+              <Target className="size-4 text-[#a4e5ff] mb-3" strokeWidth={1.8} aria-hidden="true" />
+              <strong className="block text-base font-semibold text-white mb-1">Demanda</strong>
+              <p className="evidence-fact-copy text-white/60">Cliente + canal + impacto real do serviço.</p>
+            </article>
+            <article className="min-h-[7rem] p-4 sm:p-5 border-b md:border-b-0 border-white/14">
+              <Users className="size-4 text-[#d9c9ff] mb-3" strokeWidth={1.8} aria-hidden="true" />
+              <strong className="block text-base font-semibold text-white mb-1">Responsável</strong>
+              <p className="evidence-fact-copy text-white/60">Executor nominal + revisor técnico.</p>
+            </article>
+            <article className="min-h-[7rem] p-4 sm:p-5 border-r border-white/14">
+              <Clock className="size-4 text-[#f2d28e] mb-3" strokeWidth={1.8} aria-hidden="true" />
+              <strong className="block text-base font-semibold text-white mb-1">Prazo</strong>
+              <p className="evidence-fact-copy text-white/60">Compromisso pactuado + alerta preventivo.</p>
+            </article>
+            <article className="min-h-[7rem] p-4 sm:p-5">
+              <CheckCircle2 className="size-4 text-[#b9f1d5] mb-3" strokeWidth={1.8} aria-hidden="true" />
+              <strong className="block text-base font-semibold text-white mb-1">Conclusão</strong>
+              <p className="evidence-fact-copy text-white/60">Evidência arquivada + devolutiva formal.</p>
+            </article>
+          </section>
 
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/15">
-            <span className="text-xs font-bold text-[#a3adb8] uppercase block mb-1">ETAPA 02</span>
-            <h4 className="text-2xl font-bold text-white mb-2">Durante · Executar</h4>
-            <p className="text-sm text-[#d5dbe4] leading-relaxed">
-              Cumprir o processo homologado sem atalhos, comunicar bloqueios técnicos com antecedência e atualizar o sistema oficial em tempo real.
-            </p>
-          </div>
+          <section className="relative grid grid-cols-1 md:grid-cols-3 gap-7 md:gap-8" aria-label="Etapas da evidência">
+            <div className="hidden md:block absolute left-[16.7%] right-[16.7%] top-5 border-t border-dashed border-white/28" aria-hidden="true" />
+            <article className="relative pt-1">
+              <div className="relative z-10 flex items-center gap-3">
+                <span className="grid size-10 place-items-center bg-[#1688d3] text-white text-xs font-black font-mono">01</span>
+                <span className="text-[.68rem] font-bold tracking-[.13em] uppercase text-[#a4e5ff]">Etapa</span>
+              </div>
+              <div className="mt-5 border-l border-white/20 pl-5">
+                <h4 className="evidence-stage-title text-white">Antes · Preparar</h4>
+                <p className="evidence-stage-copy mt-3 text-white/68">Analisar carteira, mapear dependências, confirmar prazos, identificar riscos e certificar executor, revisor e substituto antes de iniciar.</p>
+              </div>
+            </article>
 
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/15">
-            <span className="text-xs font-bold text-[#a3adb8] uppercase block mb-1">ETAPA 03</span>
-            <h4 className="text-2xl font-bold text-white mb-2">Depois · Validar</h4>
-            <p className="text-sm text-[#d5dbe4] leading-relaxed">
-              Conduzir revisão técnica, coletar aceite formal, arquivar a evidência incontestável, dar retorno ao cliente e documentar melhorias.
-            </p>
-          </div>
-        </div>
+            <article className="relative pt-1">
+              <div className="relative z-10 flex items-center gap-3">
+                <span className="grid size-10 place-items-center bg-[#9e7cd6] text-white text-xs font-black font-mono">02</span>
+                <span className="text-[.68rem] font-bold tracking-[.13em] uppercase text-[#d9c9ff]">Etapa</span>
+              </div>
+              <div className="mt-5 border-l border-white/20 pl-5">
+                <h4 className="evidence-stage-title text-white">Durante · Executar</h4>
+                <p className="evidence-stage-copy mt-3 text-white/68">Cumprir o processo homologado sem atalhos, comunicar bloqueios técnicos com antecedência e atualizar o sistema oficial em tempo real.</p>
+              </div>
+            </article>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <div className="p-3 rounded-xl bg-white/5 border border-white/10">
-            <strong className="text-white text-sm block">Demanda</strong>
-            <span className="text-xs text-[#a3adb8]">Cliente + canal + impacto real do serviço.</span>
-          </div>
-          <div className="p-3 rounded-xl bg-white/5 border border-white/10">
-            <strong className="text-white text-sm block">Responsável</strong>
-            <span className="text-xs text-[#a3adb8]">Executor nominal + revisor técnico.</span>
-          </div>
-          <div className="p-3 rounded-xl bg-white/5 border border-white/10">
-            <strong className="text-white text-sm block">Prazo</strong>
-            <span className="text-xs text-[#a3adb8]">Compromisso pactuado + alerta preventivo.</span>
-          </div>
-          <div className="p-3 rounded-xl bg-white/5 border border-white/10">
-            <strong className="text-white text-sm block">Conclusão</strong>
-            <span className="text-xs text-[#a3adb8]">Evidência arquivada + devolutiva formal.</span>
-          </div>
-        </div>
+            <article className="relative pt-1">
+              <div className="relative z-10 flex items-center gap-3">
+                <span className="grid size-10 place-items-center bg-[#b9821c] text-white text-xs font-black font-mono">03</span>
+                <span className="text-[.68rem] font-bold tracking-[.13em] uppercase text-[#f2d28e]">Etapa</span>
+              </div>
+              <div className="mt-5 border-l border-white/20 pl-5">
+                <h4 className="evidence-stage-title text-white">Depois · Validar</h4>
+                <p className="evidence-stage-copy mt-3 text-white/68">Conduzir revisão técnica, coletar aceite formal, arquivar a evidência incontestável, dar retorno ao cliente e documentar melhorias.</p>
+              </div>
+            </article>
+          </section>
+        </main>
       </div>
     );
   }
@@ -528,39 +536,46 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
           <span className="text-4xl sm:text-6xl font-black text-white/10">13</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-auto">
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/15 backdrop-blur-xl flex flex-col justify-between">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 my-auto">
+          <div className="p-6 bg-white/[0.045] border border-white/15 flex flex-col justify-between">
             <div>
-              <span className="text-xs font-bold tracking-wider text-[#a3adb8] uppercase block mb-1">SUSTENTAÇÃO DO NEGÓCIO</span>
-              <h3 className="text-2xl font-bold text-white mb-2">Questor & Alterdata (Continuidade)</h3>
-              <p className="text-sm text-[#d5dbe4] mb-4">Manter fechamentos e obrigações sem oscilação durante a preparação do ambiente futuro.</p>
+              <div className="flex items-center justify-between gap-4">
+                <span className="inline-flex items-center gap-2 text-[.68rem] font-bold tracking-[.13em] text-white/56 uppercase"><span className="size-1.5 rounded-full bg-white/55" />SUSTENTAÇÃO DO NEGÓCIO</span>
+                <Layers className="size-4 text-white/42" strokeWidth={1.7} aria-hidden="true" />
+              </div>
+              <h3 className="migration-card-title text-white mt-4">Questor & Alterdata (Continuidade)</h3>
+              <p className="migration-summary text-white/72 mt-4 pb-5 border-b border-white/14">Manter fechamentos e obrigações sem oscilação durante a preparação do ambiente futuro.</p>
             </div>
-            <ul className="space-y-2 text-sm text-[#a3adb8]">
-              <li>• Conferência contínua de bases cadastrais e histórico de fechamentos.</li>
-              <li>• Manutenção de prazos e SLAs vigentes sem ruído para o cliente.</li>
-              <li>• Responsáveis e prazos claros para garantir conformidade diária.</li>
+            <ul className="migration-list mt-5 space-y-3 text-white/62">
+              <li className="flex gap-3"><span className="mt-[.46rem] size-1.5 shrink-0 rounded-full bg-white/52" />Conferência contínua de bases cadastrais e histórico de fechamentos.</li>
+              <li className="flex gap-3"><span className="mt-[.46rem] size-1.5 shrink-0 rounded-full bg-white/52" />Manutenção de prazos e SLAs vigentes sem ruído para o cliente.</li>
+              <li className="flex gap-3"><span className="mt-[.46rem] size-1.5 shrink-0 rounded-full bg-white/52" />Responsáveis e prazos claros para garantir conformidade diária.</li>
             </ul>
           </div>
 
-          <div className="p-6 rounded-2xl bg-white/10 border-2 border-white/30 backdrop-blur-xl flex flex-col justify-between">
+          <div className="p-6 bg-[#1688d3]/[.12] border border-[#4ca8df]/55 flex flex-col justify-between">
             <div>
-              <span className="text-xs font-bold tracking-wider text-white uppercase block mb-1">HOMOLOGAÇÃO & DESTINO</span>
-              <h3 className="text-2xl font-bold text-white mb-2">Sistema Domínio (Ambiente Futuro)</h3>
-              <p className="text-sm text-[#d5dbe4] mb-4">Parametrizar ambiente, migrar cadastros, comparar fechamentos espelhados e homologar por lote seguro.</p>
+              <div className="flex items-center justify-between gap-4">
+                <span className="inline-flex items-center gap-2 text-[.68rem] font-bold tracking-[.13em] text-[#a4e5ff] uppercase"><span className="size-1.5 rounded-full bg-[#83ecbf]" />HOMOLOGAÇÃO & DESTINO</span>
+                <Database className="size-4 text-[#a4e5ff]" strokeWidth={1.7} aria-hidden="true" />
+              </div>
+              <h3 className="migration-card-title text-white mt-4">Sistema Domínio (Ambiente Futuro)</h3>
+              <p className="migration-summary text-white/80 mt-4 pb-5 border-b border-[#a4e5ff]/22">Parametrizar ambiente, migrar cadastros, comparar fechamentos espelhados e homologar por lote seguro.</p>
             </div>
-            <ul className="space-y-2 text-sm text-white">
-              <li>✓ Módulos Fiscal, Contábil e DP com validações técnicas independentes.</li>
-              <li>✓ Treinamento intensivo de usuários, perfis de acesso e testes.</li>
-              <li>✓ Ingresso oficial da BU somente após aceite formal da diretoria técnica.</li>
+            <ul className="migration-list mt-5 space-y-3 text-white/84">
+              <li className="flex gap-3"><CheckCircle2 className="mt-0.5 size-4 shrink-0 text-[#83ecbf]" strokeWidth={1.9} aria-hidden="true" />Módulos Fiscal, Contábil e DP com validações técnicas independentes.</li>
+              <li className="flex gap-3"><CheckCircle2 className="mt-0.5 size-4 shrink-0 text-[#83ecbf]" strokeWidth={1.9} aria-hidden="true" />Treinamento intensivo de usuários, perfis de acesso e testes.</li>
+              <li className="flex gap-3"><CheckCircle2 className="mt-0.5 size-4 shrink-0 text-[#83ecbf]" strokeWidth={1.9} aria-hidden="true" />Ingresso oficial da BU somente após aceite formal da diretoria técnica.</li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-4 p-3.5 rounded-xl bg-white/5 border border-white/15 flex items-center gap-3 text-sm text-[#d5dbe4]">
-          <span className="px-3 py-1 rounded-md bg-white text-black font-bold text-xs uppercase tracking-wider shrink-0">
+        <div className="mt-4 flex items-start gap-3 text-sm text-[#d5dbe4]">
+          <span className="inline-flex shrink-0 items-center gap-2 px-3 py-2 border border-[#76d8ff]/40 bg-[#199bd0]/[.10] text-[#a4e5ff] font-bold text-xs uppercase tracking-[.12em]">
+            <Database className="w-3.5 h-3.5" strokeWidth={1.8} aria-hidden="true" />
             DIRETRIZ DE TECNOLOGIA
           </span>
-          <span>Datas de migração seguem estritamente o cronograma técnico aprovado; nenhum módulo é considerado ativo sem teste de espelhamento validado.</span>
+          <span className="pt-1.5 text-white/74 font-light">Datas de migração seguem estritamente o cronograma técnico aprovado; nenhum módulo é considerado ativo sem teste de espelhamento validado.</span>
         </div>
       </div>
     );
@@ -585,37 +600,47 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
           <span className="text-4xl sm:text-6xl font-black text-white/10">14</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-auto">
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/15">
-            <span className="text-xs font-bold text-[#a3adb8] uppercase block mb-1">CONDUZIR COM MÉTODO</span>
-            <h4 className="text-2xl font-bold text-white mb-2">Lideranças</h4>
-            <p className="text-sm text-[#d5dbe4] leading-relaxed">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 my-auto">
+          <div className="relative p-6 bg-black/[.22] border border-white/18">
+            <span className="absolute right-6 top-6 grid size-10 place-items-center rounded-full border border-[#76d8ff]/45 bg-[#199bd0]/[.16] text-[#a4e5ff]">
+              <Users className="size-[1.1rem]" strokeWidth={1.8} aria-hidden="true" />
+            </span>
+            <span className="text-[.68rem] font-bold tracking-[.12em] text-[#a3adb8] uppercase block mb-3">CONDUZIR COM MÉTODO</span>
+            <h4 className="culture-card-title text-white mb-3">Lideranças</h4>
+            <p className="culture-card-copy text-[#d5dbe4]/82">
               Distribuir tarefas com equilíbrio, orientar tecnicamente, revisar entregas, definir prioridades com firmeza e desenvolver as equipes sob sua gestão.
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/15">
-            <span className="text-xs font-bold text-[#a3adb8] uppercase block mb-1">ENTREGA RESPONSÁVEL</span>
-            <h4 className="text-2xl font-bold text-white mb-2">Colaboradores</h4>
-            <p className="text-sm text-[#d5dbe4] leading-relaxed">
+          <div className="relative p-6 bg-black/[.22] border border-white/18">
+            <span className="absolute right-6 top-6 grid size-10 place-items-center rounded-full border border-[#c3a4f0]/45 bg-[#9e7cd6]/[.16] text-[#d9c9ff]">
+              <ShieldCheck className="size-[1.1rem]" strokeWidth={1.8} aria-hidden="true" />
+            </span>
+            <span className="text-[.68rem] font-bold tracking-[.12em] text-[#a3adb8] uppercase block mb-3">ENTREGA RESPONSÁVEL</span>
+            <h4 className="culture-card-title text-white mb-3">Colaboradores</h4>
+            <p className="culture-card-copy text-[#d5dbe4]/82">
               Conhecer os processos do início ao fim, cumprir os padrões homologados, comunicar riscos preventivamente e apresentar evidências documentadas.
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/15">
-            <span className="text-xs font-bold text-[#a3adb8] uppercase block mb-1">DESENVOLVIMENTO CONTÍNUO</span>
-            <h4 className="text-2xl font-bold text-white mb-2">RH e Desenvolvimento</h4>
-            <p className="text-sm text-[#d5dbe4] leading-relaxed">
+          <div className="relative p-6 bg-black/[.22] border border-white/18">
+            <span className="absolute right-6 top-6 grid size-10 place-items-center rounded-full border border-[#e4bd72]/45 bg-[#b9821c]/[.16] text-[#f2d28e]">
+              <Sparkles className="size-[1.1rem]" strokeWidth={1.8} aria-hidden="true" />
+            </span>
+            <span className="text-[.68rem] font-bold tracking-[.12em] text-[#a3adb8] uppercase block mb-3">DESENVOLVIMENTO CONTÍNUO</span>
+            <h4 className="culture-card-title text-white mb-3">RH e Desenvolvimento</h4>
+            <p className="culture-card-copy text-[#d5dbe4]/82">
               Mapear gaps de competência, estruturar PDIs individuais, alimentar a Universidade Corporativa e zelar pela comunicação transparente.
             </p>
           </div>
         </div>
 
-        <div className="mt-4 p-3.5 rounded-xl bg-white/5 border border-white/15 flex items-center gap-3 text-sm text-[#d5dbe4]">
-          <span className="px-3 py-1 rounded-md bg-white text-black font-bold text-xs uppercase tracking-wider shrink-0">
+        <div className="mt-4 flex items-start gap-3 text-sm text-[#d5dbe4]">
+          <span className="inline-flex shrink-0 items-center gap-2 px-3 py-2 border border-[#c3a4f0]/40 bg-[#9e7cd6]/[.10] text-[#d0b9ff] font-bold text-xs uppercase tracking-[.12em]">
+            <Users className="w-3.5 h-3.5" strokeWidth={1.8} aria-hidden="true" />
             VALOR CULTURAL
           </span>
-          <span><b>Compromisso com o talento:</b> Não vamos medir a virada por nomes em caixas. Vamos medir por competência demonstrada, qualidade de entrega e confiança recíproca.</span>
+          <span className="pt-1.5 text-white/74 font-light"><b className="font-semibold text-white/90">Compromisso com o talento:</b> Não vamos medir a virada por nomes em caixas. Vamos medir por competência demonstrada, qualidade de entrega e confiança recíproca.</span>
         </div>
       </div>
     );
@@ -633,39 +658,40 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
     ];
 
     return (
-      <div className="w-full h-full flex flex-col justify-between py-6 px-8 md:px-14 lg:px-20 bg-[#0a0d12] text-[#f1f4f8] select-none">
+      <div className="w-full h-full flex flex-col justify-between py-6 px-8 md:px-14 lg:px-20 bg-[#f8f9fa] text-[#0a0d12] select-none">
         <div className="flex justify-between items-start mb-3">
           <div>
-            <span className="inline-block text-xs font-bold tracking-widest uppercase bg-white/5 border border-white/15 px-4 py-1 rounded-full text-[#d5dbe4] mb-2">
+            <span className="inline-block text-xs font-bold tracking-widest uppercase bg-black/5 border border-black/15 px-4 py-1 rounded-full text-[#0a0d12] mb-2">
               {slide.eyebrow}
             </span>
-            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white">
+            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#0a0d12]">
               Expandir somente quando estiver pronto.
             </h2>
-            <p className="text-sm sm:text-base text-[#a3adb8] max-w-4xl mt-1">
+            <p className="text-sm sm:text-base text-[#49525c] max-w-4xl mt-1">
               A evolução da Coomarcas é orientada por critérios objetivos de prontidão técnica e maturidade operacional, e não por datas arbitrárias no calendário.
             </p>
           </div>
-          <span className="text-4xl sm:text-6xl font-black text-white/10">15</span>
+          <span className="text-4xl sm:text-6xl font-black text-black/10">15</span>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 my-auto">
           {steps.map((st, i) => (
-            <div key={i} className="p-4 rounded-xl bg-white/5 border border-white/15 hover:border-white/30 transition-all flex flex-col justify-between">
+            <div key={i} className="p-4 bg-white/[.50] border border-black/20 hover:border-black/35 transition-colors flex flex-col justify-between">
               <div>
-                <span className="text-2xl font-black font-mono text-white/40 block mb-2">{st.num}</span>
-                <h4 className="text-base font-bold text-white mb-1">{st.title}</h4>
+                <span className="text-2xl font-black font-mono text-black/38 block mb-2">{st.num}</span>
+                <h4 className="text-base font-semibold text-[#0a0d12] mb-1">{st.title}</h4>
               </div>
-              <p className="text-xs text-[#a3adb8] leading-relaxed mt-2">{st.desc}</p>
+              <p className="text-[.78rem] text-[#49525c] leading-[1.45] mt-2 font-light">{st.desc}</p>
             </div>
           ))}
         </div>
 
-        <div className="mt-4 p-3.5 rounded-xl bg-white/5 border border-white/15 flex items-center gap-3 text-sm text-[#d5dbe4]">
-          <span className="px-3 py-1 rounded-md bg-white text-black font-bold text-xs uppercase tracking-wider shrink-0">
+        <div className="mt-4 flex items-start gap-3 text-sm text-[#49525c]">
+          <span className="inline-flex shrink-0 items-center gap-2 px-3 py-2 border border-[#1688d3]/40 bg-[#199bd0]/[.10] text-[#126bc8] font-bold text-xs uppercase tracking-[.12em]">
+            <CheckCircle2 className="w-3.5 h-3.5" strokeWidth={1.8} aria-hidden="true" />
             PRONTIDÃO TÉCNICA
           </span>
-          <span>A evolução depende de prontidão técnica, capacidade comprovada, sistemas homologados e decisão formal da liderança.</span>
+          <span className="pt-1.5 text-[#49525c] font-light">A evolução depende de prontidão técnica, capacidade comprovada, sistemas homologados e decisão formal da liderança.</span>
         </div>
       </div>
     );
@@ -674,10 +700,10 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
   // 18. SLIDE 20: 16 / NOSSOS COMPROMISSOS
   if (slide.id === 20) {
     const comp = [
-      { num: "01", title: "Conhecer seu papel", desc: "Entender exatamente o que você executa, quais são seus limites de alçada, quando acionar outra área e a quem você responde." },
-      { num: "02", title: "Antecipar o risco", desc: "Avisar proativamente sobre qualquer pendência, divergência técnica ou risco de atraso antes que a falha atinja o cliente." },
-      { num: "03", title: "Registrar o trabalho", desc: "Garantir que histórico, prazos pactuados, protocolos e evidências de entrega estejam arquivados nos sistemas homologados." },
-      { num: "04", title: "Colaborar entre áreas", desc: "Receber transições com aceite rigoroso, honrar combinados interdepartamentais e compartilhar conhecimento." },
+      { num: "01", title: "Conhecer seu papel", desc: "Entender exatamente o que você executa, quais são seus limites de alçada, quando acionar outra área e a quem você responde.", Icon: Target, color: 'text-[#a4e5ff] border-[#76d8ff]/45 bg-[#199bd0]/[.16]' },
+      { num: "02", title: "Antecipar o risco", desc: "Avisar proativamente sobre qualquer pendência, divergência técnica ou risco de atraso antes que a falha atinja o cliente.", Icon: AlertCircle, color: 'text-[#f2d28e] border-[#e4bd72]/45 bg-[#b9821c]/[.16]' },
+      { num: "03", title: "Registrar o trabalho", desc: "Garantir que histórico, prazos pactuados, protocolos e evidências de entrega estejam arquivados nos sistemas homologados.", Icon: Database, color: 'text-[#d9c9ff] border-[#c3a4f0]/45 bg-[#9e7cd6]/[.16]' },
+      { num: "04", title: "Colaborar entre áreas", desc: "Receber transições com aceite rigoroso, honrar combinados interdepartamentais e compartilhar conhecimento.", Icon: Users, color: 'text-[#b9f1d5] border-[#83ecbf]/45 bg-[#2aa86c]/[.16]' },
     ];
 
     return (
@@ -697,21 +723,38 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
           <span className="text-4xl sm:text-6xl font-black text-white/10">16</span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-auto">
-          {comp.map((c, i) => (
-            <div key={i} className="p-5 rounded-xl bg-white/5 border border-white/15 hover:border-white/30 transition-all">
-              <span className="text-xs font-bold text-[#a3adb8] uppercase block mb-1">COMPROMISSO {c.num}</span>
-              <h4 className="text-xl font-bold text-white mb-2">{c.title}</h4>
-              <p className="text-xs sm:text-sm text-[#d5dbe4] leading-relaxed">{c.desc}</p>
-            </div>
-          ))}
+        <div className="my-auto grid grid-cols-1 lg:grid-cols-[.42fr_1fr] gap-8 lg:gap-12 items-stretch">
+          <aside className="hidden lg:flex flex-col justify-between border-r border-white/18 py-2 pr-9">
+            <span className="font-mono text-[.7rem] font-bold tracking-[.18em] uppercase text-white/46">Compromissos</span>
+            <span className="font-display text-[10rem] leading-[.72] font-semibold tracking-[-.1em] text-white/14">04</span>
+            <span className="max-w-[13rem] text-sm leading-relaxed text-white/58">O padrão da Coomarcas se confirma nas escolhas feitas todos os dias.</span>
+          </aside>
+          <section className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-7" aria-label="Quatro compromissos para o dia a dia">
+            {comp.map((c) => {
+              const Icon = c.Icon;
+              return (
+              <article key={c.num} className="border-t border-white/28 pt-5">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="font-mono text-xs font-bold tracking-wider text-white/42">{c.num}</span>
+                  <span className={`grid size-8 place-items-center rounded-full border ${c.color}`}>
+                    <Icon className="size-3.5" strokeWidth={1.8} aria-hidden="true" />
+                  </span>
+                  <span className="text-[.66rem] font-bold tracking-[.13em] text-white/52 uppercase">Compromisso</span>
+                </div>
+                <h4 className="text-xl font-semibold text-white mb-2">{c.title}</h4>
+                <p className="commitment-card-copy text-white/72">{c.desc}</p>
+              </article>
+              );
+            })}
+          </section>
         </div>
 
-        <div className="mt-4 p-3.5 rounded-xl bg-white/5 border border-white/15 flex items-center gap-3 text-sm text-[#d5dbe4]">
-          <span className="px-3 py-1 rounded-md bg-white text-black font-bold text-xs uppercase tracking-wider shrink-0">
+        <div className="mt-4 flex items-start gap-3 text-sm text-[#d5dbe4]">
+          <span className="inline-flex shrink-0 items-center gap-2 px-3 py-2 border border-[#c3a4f0]/40 bg-[#9e7cd6]/[.10] text-[#d0b9ff] font-bold text-xs uppercase tracking-[.12em]">
+            <Target className="w-3.5 h-3.5" strokeWidth={1.8} aria-hidden="true" />
             POSTURA COOMARCAS
           </span>
-          <span>Uma equipe de alta performance se constrói na confiança: faça o que foi combinado, no prazo combinado, com a qualidade combinada.</span>
+          <span className="pt-1.5 text-white/74 font-light">Uma equipe de alta performance se constrói na confiança: faça o que foi combinado, no prazo combinado, com a qualidade combinada.</span>
         </div>
       </div>
     );
@@ -733,28 +776,33 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
             Uma experiência melhor.
           </h1>
 
-          <p className="text-xl sm:text-2xl md:text-3xl font-semibold text-[#0a0d12] mb-6 border-l-4 border-black pl-5">
-            Disciplina hoje. Qualidade amanhã. Crescimento com consistência.
-          </p>
+          <div className="mb-8 flex flex-wrap items-center gap-x-4 gap-y-3 text-[#0a0d12]">
+            <span className="inline-flex items-center gap-3 text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight">
+              <span className="grid size-10 place-items-center rounded-full bg-[#0a0d12] text-white shadow-sm">
+                <CheckCircle2 size={20} strokeWidth={2.2} aria-hidden="true" />
+              </span>
+              Disciplina hoje.
+            </span>
+            <ArrowRight className="hidden sm:block text-[#8a96a3]" size={22} strokeWidth={1.7} aria-hidden="true" />
+            <span className="inline-flex items-center gap-3 text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight">
+              <span className="grid size-10 place-items-center rounded-full bg-[#c28d27]/15 text-[#9a6810]">
+                <Award size={20} strokeWidth={2.1} aria-hidden="true" />
+              </span>
+              Qualidade amanhã.
+            </span>
+            <ArrowRight className="hidden sm:block text-[#8a96a3]" size={22} strokeWidth={1.7} aria-hidden="true" />
+            <span className="inline-flex items-center gap-3 text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight">
+              <span className="grid size-10 place-items-center rounded-full bg-[#2893ff]/12 text-[#126bc8]">
+                <Sparkles size={20} strokeWidth={2.1} aria-hidden="true" />
+              </span>
+              Crescimento com consistência.
+            </span>
+          </div>
 
           <p className="text-base sm:text-lg md:text-xl text-[#49525c] leading-relaxed max-w-3xl">
             Construído para valorizar o trabalho de cada colaborador, blindar nossos clientes e estabelecer o padrão definitivo de excelência contábil no Brasil.
           </p>
 
-          <div className="flex flex-wrap gap-4 mt-8">
-            <button
-              onClick={() => onGoToSlide(0)}
-              className="px-6 py-3 rounded-full bg-black text-white font-bold text-sm hover:bg-neutral-800 transition-colors shadow-lg"
-            >
-              Reiniciar Apresentação (Início)
-            </button>
-            <button
-              onClick={() => onGoToSlide(5)}
-              className="px-6 py-3 rounded-full bg-white text-black border border-black/20 font-bold text-sm hover:bg-black/5 transition-colors"
-            >
-              Ver Organograma Institucional
-            </button>
-          </div>
         </div>
 
         <div className="text-xs text-[#717d8a] border-t border-black/10 pt-3 flex justify-between">

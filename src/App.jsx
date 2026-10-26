@@ -34,6 +34,32 @@ function PresentationChrome({ isLight, page, showMark = true }) {
   );
 }
 
+const lightBackgroundVideos = [
+  '/videos/bg-vd-branco.mp4',
+  '/videos/bg-vd-branco-2.mp4',
+  '/videos/bg-vd-branco-3.mp4',
+];
+
+function slideBackgroundVideo(slide) {
+  if (slide.id === 1 || slide.id === 2 || slide.id === 6) return '/videos/bg-vd-escuro.mp4';
+  if (slide.id === 7) return '/videos/bg-vd-escuro-pontos.mp4';
+  if (slide.id === 10) return '/videos/bg-vd-azul.mp4';
+  if (slide.id === 18) return '/videos/bg-onda-baixo.mp4';
+  if (slide.id === 19) return '/videos/bg-vd-branco-2.mp4';
+  if (slide.id === 20) return '/videos/bg-vd-linhas.mp4';
+  if (slide.id === 21) return '/videos/bg-vd-branco-3.mp4';
+  if (!slide.isLight) return null;
+  const lightSlidesBefore = slidesData.filter((item) => item.isLight && item.id <= slide.id);
+  return lightBackgroundVideos[(lightSlidesBefore.length - 1) % lightBackgroundVideos.length];
+}
+
+function slideBackgroundOverlay(slide) {
+  if (slide.id === 2) return 'soft-black';
+  if (slide.id === 7) return 'soft-black points-overlay';
+  if (slide.id === 10) return 'soft-blue';
+  return null;
+}
+
 export default function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [hasStarted, setHasStarted] = useState(false);
@@ -46,6 +72,8 @@ export default function App() {
   const reducedMotion = useReducedMotion();
   const totalSlides = slidesData.length;
   const currentSlide = slidesData[currentIndex] || slidesData[0];
+  const backgroundVideo = slideBackgroundVideo(currentSlide);
+  const backgroundOverlay = slideBackgroundOverlay(currentSlide);
 
   const goToSlide = useCallback((index) => {
     if (index >= 0 && index < totalSlides && index !== currentIndex) {
@@ -123,7 +151,9 @@ export default function App() {
         {!hasStarted ? <IntroScreen onStart={startPresentation} /> : <>
           <div className="presentation-progress" aria-hidden="true"><span style={{ width: `${((currentIndex + 1) / totalSlides) * 100}%` }} /></div>
           <AnimatePresence mode="wait" custom={direction} initial={false}>
-            <motion.section key={currentSlide.id} custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ duration: reducedMotion ? 0 : 0.48, ease: [0.22, 0.8, 0.2, 1] }} className={`slide-frame ${currentSlide.isLight ? 'light' : 'dark'} ${currentSlide.id === 1 ? 'cover-slide' : ''}`}>
+            <motion.section key={currentSlide.id} custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ duration: reducedMotion ? 0 : 0.48, ease: [0.22, 0.8, 0.2, 1] }} className={`slide-frame ${currentSlide.isLight ? 'light' : 'dark'} ${currentSlide.id === 1 ? 'cover-slide' : ''} ${backgroundVideo ? 'video-background' : ''}`}>
+              {backgroundVideo && <video className="slide-background-video" src={backgroundVideo} autoPlay muted loop playsInline preload="auto" aria-hidden="true" tabIndex={-1} />}
+              {backgroundOverlay && <div className={`slide-video-overlay ${backgroundOverlay}`} aria-hidden="true" />}
               <SlideRenderer slide={currentSlide} index={currentIndex} totalSlides={totalSlides} onGoToSlide={goToSlide} onRegisterNavigation={registerAccordionNavigation} />
               <PresentationChrome isLight={currentSlide.isLight} page={currentIndex + 1} showMark={currentIndex !== 0} />
             </motion.section>

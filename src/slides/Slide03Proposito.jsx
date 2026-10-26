@@ -14,7 +14,7 @@ export default function Slide03Proposito({ slide, onRegisterNavigation }) {
       </header>
 
       <div className="w-full max-w-7xl mx-auto flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-[1.06fr_.94fr] gap-10 lg:gap-16 items-center py-8">
-        <blockquote className="max-w-3xl text-2xl sm:text-3xl lg:text-[2.55rem] font-bold tracking-tight leading-[1.08]">
+        <blockquote className="max-w-3xl text-2xl sm:text-3xl lg:text-[2.55rem] font-normal tracking-tight leading-[1.08]">
           “A mudança só estará concluída quando for percebida na rotina diária, na qualidade da entrega técnica e na experiência concreta do cliente.”
         </blockquote>
         <ContentAccordion items={slide.pillars || []} tone="light" onRegisterNavigation={onRegisterNavigation} />

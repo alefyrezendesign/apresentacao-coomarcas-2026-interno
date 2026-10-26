@@ -47,6 +47,7 @@ function slideBackgroundVideo(slide) {
   if (slide.id === 1 || slide.id === 6) return '/videos/bg-vd-escuro.mp4';
   if (slide.id === 7) return '/videos/bg-vd-escuro-pontos.mp4';
   if (slide.id === 10) return '/videos/bg-vd-azul.mp4';
+  if ([14, 15].includes(slide.id)) return '/videos/bg-gradient-escuro.mp4';
   if (slide.id === 18) return '/videos/bg-onda-baixo.mp4';
   if (slide.id === 19) return '/videos/bg-vd-branco-2.mp4';
   if (slide.id === 20) return '/videos/bg-vd-linhas.mp4';
@@ -60,6 +61,7 @@ function slideBackgroundOverlay(slide) {
   if ([2, 4, 5, 8, 9].includes(slide.id)) return 'liquid-overlay';
   if (slide.id === 7) return 'soft-black points-overlay';
   if (slide.id === 10) return 'soft-blue';
+  if ([14, 15].includes(slide.id)) return 'soft-black';
   if (slide.id === 20) return 'lines-overlay';
   return null;
 }

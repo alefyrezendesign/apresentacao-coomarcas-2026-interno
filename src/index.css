@@ -35,10 +35,7 @@ body { background: #000; }
 .slide-video-overlay.soft-black { background: rgba(3, 5, 8, .68); }
 .slide-video-overlay.points-overlay { background: rgba(2, 4, 8, .84); }
 .slide-video-overlay.marcas-dark-overlay {
-  background: rgba(2, 4, 8, .92);
-  background-image: linear-gradient(180deg, rgba(1, 3, 6, .96) 0%, rgba(2, 5, 12, .88) 50%, rgba(1, 3, 6, .96) 100%);
-  backdrop-filter: blur(1.5px);
-  -webkit-backdrop-filter: blur(1.5px);
+  background: rgba(2, 4, 8, .75);
 }
 .slide-video-overlay.soft-blue { background: rgba(2, 6, 18, .78); }
 .slide-video-overlay.lines-overlay { background: rgba(0, 0, 0, .45); }

@@ -32,7 +32,7 @@ body { background: #000; }
 }
 .slide-background-video { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 .slide-video-overlay { position: absolute; z-index: 2 !important; inset: 0; pointer-events: none; }
-.slide-video-overlay.soft-black { background: rgba(3, 5, 8, .50); }
+.slide-video-overlay.soft-black { background: rgba(3, 5, 8, .68); }
 .slide-video-overlay.points-overlay { background: rgba(2, 4, 8, .84); }
 .slide-video-overlay.marcas-dark-overlay {
   background: rgba(2, 4, 8, .75);
@@ -40,7 +40,7 @@ body { background: #000; }
 .slide-video-overlay.soft-blue { background: rgba(2, 6, 18, .78); }
 .slide-video-overlay.lines-overlay { background: rgba(0, 0, 0, .45); }
 .slide-video-overlay.liquid-overlay {
-  background: rgba(4, 7, 12, .50);
+  background: rgba(4, 7, 12, .70);
 }
 .slide-frame.video-background > div:not(.presentation-chrome):not(.slide-video-overlay) { z-index: 5; }
 .slide-frame:not(.cover-slide) > div:not(.presentation-chrome):not(.slide-video-overlay) {

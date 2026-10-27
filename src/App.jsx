@@ -195,9 +195,9 @@ export default function App() {
   }, [goToSlide, handleNext, handlePrev, handleToggleFullscreen, hasStarted, startPresentation, totalSlides]);
 
   const variants = reducedMotion ? { enter: { opacity: 1 }, center: { opacity: 1 }, exit: { opacity: 0 } } : {
-    enter: (entryDirection) => ({ opacity: 0, x: entryDirection * 56, scale: 0.992 }),
+    enter: (entryDirection) => ({ opacity: 0, x: entryDirection * 40, scale: 0.996 }),
     center: { opacity: 1, x: 0, scale: 1 },
-    exit: (entryDirection) => ({ opacity: 0, x: entryDirection * -40, scale: 1.004 }),
+    exit: (entryDirection) => ({ opacity: 0, x: entryDirection * -28, scale: 1.002 }),
   };
 
   return (
@@ -222,7 +222,7 @@ export default function App() {
                 initial="enter"
                 animate="center"
                 exit="exit"
-                transition={{ duration: reducedMotion ? 0 : 0.48, ease: [0.22, 0.8, 0.2, 1] }}
+                transition={{ duration: reducedMotion ? 0 : 0.25, ease: [0.16, 1, 0.3, 1] }}
                 className={`slide-frame ${currentSlide.isLight ? 'light' : 'dark'} ${currentSlide.id === 1 ? 'cover-slide' : ''} ${backgroundVideo ? 'video-background' : ''}`}
               >
                 {backgroundVideo && (

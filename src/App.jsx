@@ -50,8 +50,10 @@ export function getSlideBackgroundVideo(slide) {
   if ([7, 16].includes(slide.id)) return '/videos/bg-vd-escuro-pontos.mp4';
   // Slide 10: Vídeo azul da jornada
   if (slide.id === 10) return '/videos/bg-vd-azul.mp4';
-  // Slide 13, 14, 15, 17: Gradiente escuro
-  if ([13, 14, 15, 17].includes(slide.id)) return '/videos/bg-gradient-escuro.mp4';
+  // Slide 13: fundo azul da jornada
+  if (slide.id === 13) return '/videos/bg-vd-azul.mp4';
+  // Slide 14, 15 e 17: Gradiente escuro
+  if ([14, 15, 17].includes(slide.id)) return '/videos/bg-gradient-escuro.mp4';
   // Slide 18: Onda baixa
   if (slide.id === 18) return '/videos/bg-onda-baixo.mp4';
   // Slide 19: Vídeo claro 2
@@ -68,6 +70,8 @@ export function getSlideBackgroundVideo(slide) {
 
 export function getSlideBackgroundOverlay(slide) {
   if (!slide) return null;
+  // Slide 6 (Organograma): Overlay preto 40% para escurecer suavemente o fundo
+  if (slide.id === 6) return 'black-40';
   // Slide 7 (Marcas) recebe overlay consideravelmente mais escuro com gradiente e blur para máxima legibilidade
   if (slide.id === 7) return 'marcas-dark-overlay';
   // Slides com vídeo de líquido recebem overlay escuro reforçado para máximo contraste
@@ -76,8 +80,10 @@ export function getSlideBackgroundOverlay(slide) {
   if (slide.id === 16) return 'points-overlay';
   // Slide 10 recebe overlay azul escuro de alta legibilidade
   if (slide.id === 10) return 'soft-blue';
+  // Slide 13 recebe o mesmo tratamento azul da jornada
+  if (slide.id === 13) return 'soft-blue';
   // Slides com gradiente escuro recebem overlay escuro consistente
-  if ([13, 14, 15, 17].includes(slide.id)) return 'soft-black';
+  if ([14, 15, 17].includes(slide.id)) return 'soft-black';
   // Slide 20 com linhas
   if (slide.id === 20) return 'lines-overlay';
   return null;
@@ -116,7 +122,7 @@ export default function App() {
   const [direction, setDirection] = useState(1);
   const [overviewOpen, setOverviewOpen] = useState(false);
   const [shortcutsOpen, setShortcutsOpen] = useState(false);
-  const [touchStartX, setTouchStartX] = useState(0);
+  const [touchStart, setTouchStart] = useState({ x: 0, y: 0 });
   const containerRef = useRef(null);
   const accordionNavigationRef = useRef(null);
   const reducedMotion = useReducedMotion();
@@ -203,9 +209,10 @@ export default function App() {
   return (
     <main ref={containerRef} className={`presentation-shell ${!hasStarted ? 'intro-mode' : ''}`} aria-label="Apresentação Coomarcas Nossa Virada">
       {hasStarted && <AmbientParticles />}
-      <div className="presentation-stage" onTouchStart={(e) => setTouchStartX(e.touches[0].clientX)} onTouchEnd={(e) => {
-        const diff = touchStartX - e.changedTouches[0].clientX;
-        if (hasStarted && Math.abs(diff) > 52) diff > 0 ? handleNext() : handlePrev();
+      <div className="presentation-stage" onTouchStart={(e) => setTouchStart({ x: e.touches[0].clientX, y: e.touches[0].clientY })} onTouchEnd={(e) => {
+        const diffX = touchStart.x - e.changedTouches[0].clientX;
+        const diffY = touchStart.y - e.changedTouches[0].clientY;
+        if (hasStarted && Math.abs(diffX) > 52 && Math.abs(diffX) > Math.abs(diffY) * 1.25) diffX > 0 ? handleNext() : handlePrev();
       }}>
         {!hasStarted ? (
           <IntroScreen onStart={startPresentation} />
@@ -223,7 +230,7 @@ export default function App() {
                 animate="center"
                 exit="exit"
                 transition={{ duration: reducedMotion ? 0 : 0.25, ease: [0.16, 1, 0.3, 1] }}
-                className={`slide-frame ${currentSlide.isLight ? 'light' : 'dark'} ${currentSlide.id === 1 ? 'cover-slide' : ''} ${backgroundVideo ? 'video-background' : ''}`}
+                className={`slide-frame slide-id-${currentSlide.id} ${currentSlide.isLight ? 'light' : 'dark'} ${currentSlide.id === 1 ? 'cover-slide' : ''} ${[10, 13].includes(currentSlide.id) ? 'slide-blue-box-overlay' : ''} ${backgroundVideo ? 'video-background' : ''} ${currentSlide.id === 12 || currentSlide.isPureBlack ? 'slide-pure-black' : ''}`}
               >
                 {backgroundVideo && (
                   <video

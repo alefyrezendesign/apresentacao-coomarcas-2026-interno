@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle2, AlertCircle, ArrowRight, ShieldCheck, Sparkles, Layers, Zap, Clock, Users, Database, Award, Landmark, Target } from 'lucide-react';
+import { Check, CheckCircle2, AlertCircle, ArrowRight, ShieldCheck, Sparkles, Layers, Zap, Clock, Users, Database, Award, Landmark, Target, X } from 'lucide-react';
 import OrganogramaInteractive from '../components/OrganogramaInteractive';
 import Slide01Hero from './Slide01Hero';
 import Slide02Transformacao from './Slide02Transformacao';
@@ -59,8 +59,8 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
   // 4. SLIDE 06: SETE FRENTES EXECUTIVAS
   if (slide.isFronts) {
     return (
-      <div className="w-full h-full flex flex-col justify-between py-6 px-8 md:px-14 lg:px-20 bg-[#0a0d12] text-[#f1f4f8] select-none">
-        <div className="flex justify-between items-start mb-3">
+      <div className="w-full h-full flex flex-col justify-start py-6 px-8 md:px-14 lg:px-20 bg-transparent text-[#f1f4f8] select-none">
+        <div className="flex justify-between items-start mb-6">
           <div>
             <span className="slide-standard-tag text-sm font-bold tracking-[.14em] uppercase text-white/65 mb-4">
               {slide.eyebrow}
@@ -217,7 +217,7 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
     ];
 
     return (
-      <div className="w-full h-full flex flex-col px-8 sm:px-14 lg:px-24 pt-12 sm:pt-14 pb-10 sm:pb-12 bg-[#0a0d12] text-[#f1f4f8] select-none">
+      <div className="w-full h-full flex flex-col px-8 sm:px-14 lg:px-24 pt-12 sm:pt-14 pb-10 sm:pb-12 bg-black text-[#f1f4f8] select-none">
         <header className="w-full max-w-6xl mx-auto shrink-0 flex flex-col items-center text-center">
           <span className="slide-standard-tag text-sm font-bold tracking-[.14em] uppercase text-white/65 mb-4">{slide.eyebrow}</span>
           <h2 className="text-4xl sm:text-5xl lg:text-[3.4rem] font-bold tracking-tight leading-[1.02] text-white">Suporte Relacional é o guardião da jornada.</h2>
@@ -225,7 +225,7 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
         </header>
 
         <main className="relative isolate w-full max-w-none mx-auto flex-1 min-h-0 flex flex-col justify-center py-4 sm:py-5">
-          <img src="/videos/globo.gif" alt="" className="pointer-events-none absolute z-0 left-1/2 top-[30%] h-60 w-60 sm:h-72 sm:w-72 -translate-x-1/2 -translate-y-1/2 object-contain" />
+          <img src="/videos/globo.gif" alt="" className="pointer-events-none absolute z-0 left-1/2 top-[30%] h-60 w-60 sm:h-72 sm:w-72 -translate-x-1/2 -translate-y-1/2 object-contain mix-blend-screen" />
           <section className="relative z-10 mx-auto w-full max-w-3xl h-[17rem] sm:h-[18rem]" aria-label="Áreas conectadas ao suporte relacional">
             {satellites.map((sat, index) => (
               <span key={sat} className={`absolute z-10 inline-flex items-center px-3 py-2 bg-white/[0.045] border border-white/16 text-[.66rem] sm:text-[.7rem] font-bold tracking-[.1em] text-white/76 whitespace-nowrap ${satellitePositions[index]}`}>
@@ -283,32 +283,32 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
           <span className="text-4xl sm:text-6xl font-black text-white/10">09</span>
         </div>
 
-        <div className="flex-1 min-h-0 grid grid-cols-1 md:grid-cols-2 gap-5 items-stretch my-auto">
-          <div className="relative p-6 bg-white/[0.045] border border-white/15 flex flex-col justify-between">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-stretch">
+          <div className="relative h-full p-6 bg-white/[0.045] border border-white/15 flex flex-col">
             <div>
-              <span className="text-xs font-bold tracking-wider text-[#a3adb8] uppercase block mb-1">MODELO ATUAL</span>
-              <h3 className="text-xl font-semibold text-white mb-2">CS Generalista (Transversal)</h3>
-              <p className="text-[.9rem] leading-[1.45] text-[#d5dbe4] mb-4">Atuação dispersa cobrindo toda a carteira da empresa de forma reativa.</p>
+              <span className="inline-flex items-center rounded-full border border-white/20 bg-white/[0.07] px-3 py-1 text-[.65rem] font-bold tracking-[.12em] text-white uppercase mb-3">MODELO ATUAL</span>
+              <h3 className="text-[1.35rem] font-bold tracking-tight text-white mb-2">CS Generalista <span className="text-white/60 font-medium">(Transversal)</span></h3>
+              <p className="text-[.88rem] font-light leading-[1.5] text-white/75 mb-5">Atuação dispersa cobrindo toda a carteira da empresa de forma reativa.</p>
             </div>
-            <ul className="space-y-2 text-[.86rem] leading-[1.45] text-[#a3adb8]">
-              <li>• Apagar incêndios e encaminhar solicitações pontuais às áreas.</li>
-              <li>• Contato superficial com os contratos e peculiaridades técnicas.</li>
-              <li>• Alertas de cancelamento percebidos após desgaste avançado.</li>
-              <li>• Foco no relacionamento, sem poder de mobilização na produção.</li>
+            <ul className="space-y-2.5 text-[.84rem] font-medium leading-[1.45] text-white/82">
+              <li className="flex gap-2.5"><X className="mt-0.5 size-4 shrink-0 text-white" strokeWidth={2.2} aria-hidden="true" /><span>Apagar incêndios e encaminhar solicitações pontuais às áreas.</span></li>
+              <li className="flex gap-2.5"><X className="mt-0.5 size-4 shrink-0 text-white" strokeWidth={2.2} aria-hidden="true" /><span>Contato superficial com os contratos e peculiaridades técnicas.</span></li>
+              <li className="flex gap-2.5"><X className="mt-0.5 size-4 shrink-0 text-white" strokeWidth={2.2} aria-hidden="true" /><span>Alertas de cancelamento percebidos após desgaste avançado.</span></li>
+              <li className="flex gap-2.5"><X className="mt-0.5 size-4 shrink-0 text-white" strokeWidth={2.2} aria-hidden="true" /><span>Foco no relacionamento, sem poder de mobilização na produção.</span></li>
             </ul>
           </div>
 
-          <div className="relative p-6 bg-[#1688d3]/[.12] border border-[#4ca8df]/55 flex flex-col justify-between">
+          <div className="relative h-full p-6 bg-white/[0.045] border border-[#4ca8df]/55 flex flex-col">
             <div>
-              <span className="text-xs font-bold tracking-wider text-white uppercase block mb-1">MODELO FUTURO DA VIRADA</span>
-              <h3 className="text-xl font-semibold text-white mb-2">Key Account (Gestora da BU)</h3>
-              <p className="text-[.9rem] leading-[1.45] text-[#d5dbe4] mb-4">Liderança direta da carteira do nicho com autoridade e conhecimento do cliente.</p>
+              <span className="inline-flex items-center rounded-full border border-white/20 bg-white/[0.07] px-3 py-1 text-[.65rem] font-bold tracking-[.12em] text-white uppercase mb-3">MODELO FUTURO DA VIRADA</span>
+              <h3 className="text-[1.35rem] font-bold tracking-tight text-white mb-2">Key Account <span className="text-white/60 font-medium">(Gestora da BU)</span></h3>
+              <p className="text-[.88rem] font-light leading-[1.5] text-white/75 mb-5">Liderança direta da carteira do nicho com autoridade e conhecimento do cliente.</p>
             </div>
-            <ul className="space-y-2 text-[.86rem] leading-[1.45] text-white/88">
-              <li>✓ Aceite formal da carteira e domínio profundo do contrato.</li>
-              <li>✓ Mobilização direta de Atendimento, Fiscal, Contábil e DP da BU.</li>
-              <li>✓ Gestão preventiva de prazos, pendências e devolutivas pontuais.</li>
-              <li>✓ Reuniões periódicas de entrega de valor e parceria com Suporte Relacional.</li>
+            <ul className="space-y-2.5 text-[.84rem] font-medium leading-[1.45] text-white/90">
+              <li className="flex gap-2.5"><Check className="mt-0.5 size-4 shrink-0 text-white" strokeWidth={2.4} aria-hidden="true" /><span>Aceite formal da carteira e domínio profundo do contrato.</span></li>
+              <li className="flex gap-2.5"><Check className="mt-0.5 size-4 shrink-0 text-white" strokeWidth={2.4} aria-hidden="true" /><span>Mobilização direta de Atendimento, Fiscal, Contábil e DP da BU.</span></li>
+              <li className="flex gap-2.5"><Check className="mt-0.5 size-4 shrink-0 text-white" strokeWidth={2.4} aria-hidden="true" /><span>Gestão preventiva de prazos, pendências e devolutivas pontuais.</span></li>
+              <li className="flex gap-2.5"><Check className="mt-0.5 size-4 shrink-0 text-white" strokeWidth={2.4} aria-hidden="true" /><span>Reuniões periódicas de entrega de valor e parceria com Suporte Relacional.</span></li>
             </ul>
           </div>
         </div>
@@ -380,6 +380,12 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
 
   // 13. SLIDE 15: 11 / SOLUÇÕES E AUDITTAR
   if (slide.id === 15) {
+    const solutions = [
+      { tag: 'SOLUÇÕES FISCAIS', title: 'Soluções Tributárias', desc: 'Planejamento tributário estratégico, recuperação administrativa de créditos, apuração de benefícios fiscais e compensações legais com segurança jurídica.', Icon: Landmark },
+      { tag: 'CONFIANÇA & DADOS', title: 'Diagnóstico e Revisão', desc: 'Auditoria contábil e tributária independente, revisão cadastral e parametrização de produtos, saneamento de bases e modelagem de precificação.', Icon: Database },
+      { tag: 'ALTA RENTABILIDADE', title: 'Estruturação Societária', desc: 'Planejamento de holdings patrimoniais e operacionais, reorganizações societárias, sucessão familiar, governança e antecipação estratégica de recebíveis.', Icon: Award },
+    ];
+
     return (
       <div className="w-full h-full flex flex-col justify-between py-6 px-8 md:px-14 lg:px-20 bg-[#0a0d12] text-[#f1f4f8] select-none">
         <div className="flex justify-between items-start mb-3">
@@ -397,30 +403,15 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
           <span className="text-4xl sm:text-6xl font-black text-white/10">11</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 my-auto">
-          <div className="p-6 bg-white/[0.045] border border-white/15">
-            <span className="text-[.68rem] font-bold tracking-[.12em] text-[#a3adb8] uppercase block mb-2">SOLUÇÕES FISCAIS</span>
-            <h4 className="text-xl font-semibold text-white mb-2">Soluções Tributárias</h4>
-            <p className="text-[.9rem] text-[#d5dbe4]/82 font-light leading-[1.5]">
-              Planejamento tributário estratégico, recuperação administrativa de créditos, apuração de benefícios fiscais e compensações legais com segurança jurídica.
-            </p>
-          </div>
-
-          <div className="p-6 bg-white/[0.045] border border-white/15">
-            <span className="text-[.68rem] font-bold tracking-[.12em] text-[#a3adb8] uppercase block mb-2">CONFIANÇA & DADOS</span>
-            <h4 className="text-xl font-semibold text-white mb-2">Diagnóstico e Revisão</h4>
-            <p className="text-[.9rem] text-[#d5dbe4]/82 font-light leading-[1.5]">
-              Auditoria contábil e tributária independente, revisão cadastral e parametrização de produtos, saneamento de bases e modelagem de precificação.
-            </p>
-          </div>
-
-          <div className="p-6 bg-white/[0.045] border border-white/15">
-            <span className="text-[.68rem] font-bold tracking-[.12em] text-[#a3adb8] uppercase block mb-2">ALTA RENTABILIDADE</span>
-            <h4 className="text-xl font-semibold text-white mb-2">Estruturação Societária</h4>
-            <p className="text-[.9rem] text-[#d5dbe4]/82 font-light leading-[1.5]">
-              Planejamento de holdings patrimoniais e operacionais, reorganizações societárias, sucessão familiar, governança e antecipação estratégica de recebíveis.
-            </p>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-auto">
+          {solutions.map(({ tag, title, desc, Icon }) => (
+            <div key={title} className="relative p-5 bg-white/[0.045] border border-white/15 hover:border-white/30 transition-colors">
+              <Icon className="absolute right-5 top-5 size-4 text-white/45" strokeWidth={1.6} aria-hidden="true" />
+              <span className="text-[.68rem] font-bold tracking-[.12em] text-[#a3adb8] uppercase block mb-2">{tag}</span>
+              <h4 className="text-lg font-semibold text-white mb-2">{title}</h4>
+              <p className="text-[.86rem] text-[#d5dbe4]/82 font-light leading-[1.45]">{desc}</p>
+            </div>
+          ))}
         </div>
 
         <div className="mt-4 flex items-start gap-3 text-sm text-[#d5dbe4]">
@@ -457,7 +448,7 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
           <section className="grid grid-cols-1 md:grid-cols-3 gap-7 md:gap-8" aria-label="Etapas da evidência">
             <article className="pt-1">
               <div className="flex items-center gap-3">
-                <span className="grid size-10 place-items-center bg-[#58616c] text-white text-xs font-black font-mono">01</span>
+                <span className="grid size-10 place-items-center bg-[#359cff] text-white text-xs font-black font-mono">01</span>
                 <span className="text-[.68rem] font-bold tracking-[.13em] uppercase text-white/72">Etapa</span>
               </div>
               <div className="mt-5 border-l border-white/20 pl-5">
@@ -468,7 +459,7 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
 
             <article className="pt-1">
               <div className="flex items-center gap-3">
-                <span className="grid size-10 place-items-center bg-[#58616c] text-white text-xs font-black font-mono">02</span>
+                <span className="grid size-10 place-items-center bg-[#359cff] text-white text-xs font-black font-mono">02</span>
                 <span className="text-[.68rem] font-bold tracking-[.13em] uppercase text-white/72">Etapa</span>
               </div>
               <div className="mt-5 border-l border-white/20 pl-5">
@@ -479,7 +470,7 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
 
             <article className="pt-1">
               <div className="flex items-center gap-3">
-                <span className="grid size-10 place-items-center bg-[#58616c] text-white text-xs font-black font-mono">03</span>
+                <span className="grid size-10 place-items-center bg-[#359cff] text-white text-xs font-black font-mono">03</span>
                 <span className="text-[.68rem] font-bold tracking-[.13em] uppercase text-white/72">Etapa</span>
               </div>
               <div className="mt-5 border-l border-white/20 pl-5">
@@ -536,35 +527,35 @@ export default function SlideRenderer({ slide, index, totalSlides = 21, onGoToSl
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 my-auto">
-          <div className="p-6 bg-white/[0.045] border border-white/15 flex flex-col justify-between">
+          <div className="p-6 bg-black/60 border border-white/15 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between gap-4">
-                <span className="inline-flex items-center gap-2 text-[.68rem] font-bold tracking-[.13em] text-white/56 uppercase"><span className="size-1.5 rounded-full bg-white/55" />SUSTENTAÇÃO DO NEGÓCIO</span>
-                <Layers className="size-4 text-white/42" strokeWidth={1.7} aria-hidden="true" />
+                <span className="inline-flex items-center gap-2 text-[.68rem] font-bold tracking-[.13em] text-white/72 uppercase"><span className="size-1.5 rounded-full bg-[#359cff]" />SUSTENTAÇÃO DO NEGÓCIO</span>
+                <Layers className="size-4 text-[#359cff]" strokeWidth={1.7} aria-hidden="true" />
               </div>
               <h3 className="migration-card-title text-white mt-4">Questor & Alterdata (Continuidade)</h3>
               <p className="migration-summary text-white/72 mt-4 pb-5 border-b border-white/14">Manter fechamentos e obrigações sem oscilação durante a preparação do ambiente futuro.</p>
             </div>
             <ul className="migration-list mt-5 space-y-3 text-white/62">
-              <li className="flex gap-3"><span className="mt-[.46rem] size-1.5 shrink-0 rounded-full bg-white/52" />Conferência contínua de bases cadastrais e histórico de fechamentos.</li>
-              <li className="flex gap-3"><span className="mt-[.46rem] size-1.5 shrink-0 rounded-full bg-white/52" />Manutenção de prazos e SLAs vigentes sem ruído para o cliente.</li>
-              <li className="flex gap-3"><span className="mt-[.46rem] size-1.5 shrink-0 rounded-full bg-white/52" />Responsáveis e prazos claros para garantir conformidade diária.</li>
+              <li className="flex gap-3"><span className="mt-[.46rem] size-1.5 shrink-0 rounded-full bg-[#359cff]" />Conferência contínua de bases cadastrais e histórico de fechamentos.</li>
+              <li className="flex gap-3"><span className="mt-[.46rem] size-1.5 shrink-0 rounded-full bg-[#359cff]" />Manutenção de prazos e SLAs vigentes sem ruído para o cliente.</li>
+              <li className="flex gap-3"><span className="mt-[.46rem] size-1.5 shrink-0 rounded-full bg-[#359cff]" />Responsáveis e prazos claros para garantir conformidade diária.</li>
             </ul>
           </div>
 
-          <div className="p-6 bg-[#1688d3]/[.12] border border-[#4ca8df]/55 flex flex-col justify-between">
+          <div className="p-6 bg-[#07278b]/[.30] border border-[#359cff]/70 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between gap-4">
-                <span className="inline-flex items-center gap-2 text-[.68rem] font-bold tracking-[.13em] text-[#a4e5ff] uppercase"><span className="size-1.5 rounded-full bg-[#83ecbf]" />HOMOLOGAÇÃO & DESTINO</span>
-                <Database className="size-4 text-[#a4e5ff]" strokeWidth={1.7} aria-hidden="true" />
+                <span className="inline-flex items-center gap-2 text-[.68rem] font-bold tracking-[.13em] text-white/80 uppercase"><span className="size-1.5 rounded-full bg-[#359cff]" />HOMOLOGAÇÃO & DESTINO</span>
+                <Database className="size-4 text-[#359cff]" strokeWidth={1.7} aria-hidden="true" />
               </div>
               <h3 className="migration-card-title text-white mt-4">Sistema Domínio (Ambiente Futuro)</h3>
-              <p className="migration-summary text-white/80 mt-4 pb-5 border-b border-[#a4e5ff]/22">Parametrizar ambiente, migrar cadastros, comparar fechamentos espelhados e homologar por lote seguro.</p>
+              <p className="migration-summary text-white/80 mt-4 pb-5 border-b border-[#359cff]/35">Parametrizar ambiente, migrar cadastros, comparar fechamentos espelhados e homologar por lote seguro.</p>
             </div>
             <ul className="migration-list mt-5 space-y-3 text-white/84">
-              <li className="flex gap-3"><CheckCircle2 className="mt-0.5 size-4 shrink-0 text-[#83ecbf]" strokeWidth={1.9} aria-hidden="true" />Módulos Fiscal, Contábil e DP com validações técnicas independentes.</li>
-              <li className="flex gap-3"><CheckCircle2 className="mt-0.5 size-4 shrink-0 text-[#83ecbf]" strokeWidth={1.9} aria-hidden="true" />Treinamento intensivo de usuários, perfis de acesso e testes.</li>
-              <li className="flex gap-3"><CheckCircle2 className="mt-0.5 size-4 shrink-0 text-[#83ecbf]" strokeWidth={1.9} aria-hidden="true" />Ingresso oficial da BU somente após aceite formal da diretoria técnica.</li>
+              <li className="flex gap-3"><CheckCircle2 className="mt-0.5 size-4 shrink-0 text-[#359cff]" strokeWidth={1.9} aria-hidden="true" />Módulos Fiscal, Contábil e DP com validações técnicas independentes.</li>
+              <li className="flex gap-3"><CheckCircle2 className="mt-0.5 size-4 shrink-0 text-[#359cff]" strokeWidth={1.9} aria-hidden="true" />Treinamento intensivo de usuários, perfis de acesso e testes.</li>
+              <li className="flex gap-3"><CheckCircle2 className="mt-0.5 size-4 shrink-0 text-[#359cff]" strokeWidth={1.9} aria-hidden="true" />Ingresso oficial da BU somente após aceite formal da diretoria técnica.</li>
             </ul>
           </div>
         </div>

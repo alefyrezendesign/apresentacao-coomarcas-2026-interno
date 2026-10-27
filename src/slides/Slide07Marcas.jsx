@@ -113,7 +113,7 @@ export default function Slide07Marcas({ onRegisterNavigation }) {
         return (
           <section
             key={section.id}
-            className={`overflow-hidden border transition-[background-color,border-color] duration-300 ${isOpen ? 'bg-white/[0.06] border-white/16' : 'bg-white/[0.025] border-white/14'}`}
+            className={`overflow-hidden border transition-[background-color,border-color] duration-300 ${isOpen ? 'bg-white/[0.035] border-white/20' : 'bg-white/[0.02] border-white/16'}`}
           >
             <button
               type="button"
@@ -146,7 +146,7 @@ export default function Slide07Marcas({ onRegisterNavigation }) {
                           initial={{ opacity: 0, y: 8 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.22, delay: index * 0.035 }}
-                          className="min-h-[3.75rem] px-3.5 py-2.5 border border-white/14 bg-white/[0.025] flex items-center gap-3"
+                          className="min-h-[3.75rem] px-3.5 py-2.5 border border-white/16 bg-black/30 flex items-center gap-3"
                         >
                           <span className="w-6 shrink-0 font-mono text-xs font-bold tracking-[.08em] text-white/42">
                             {String(index + 1).padStart(2, '0')}

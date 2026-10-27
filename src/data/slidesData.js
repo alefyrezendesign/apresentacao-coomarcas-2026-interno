@@ -187,7 +187,8 @@ export const slidesData = [
     eyebrow: "RETENÇÃO E GOVERNANÇA DA CARTEIRA",
     headline: "Suporte Relacional é o guardião da jornada.",
     lead: "Atua de forma neutra e estratégica entre marcas, clientes e BUs: detecta riscos precoces, exige prazos e zela pela fidelização — sem executar tarefas técnicas.",
-    isLight: false
+    isLight: false,
+    isPureBlack: true
   },
   {
     id: 13,

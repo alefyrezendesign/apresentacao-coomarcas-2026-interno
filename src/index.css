@@ -37,7 +37,7 @@ body { background: #000; }
 .slide-video-overlay.marcas-dark-overlay {
   background: rgba(2, 4, 8, .75);
 }
-.slide-video-overlay.soft-blue { background: rgba(2, 6, 18, .78); }
+.slide-video-overlay.soft-blue { background: rgba(2, 6, 18, .60); }
 .slide-video-overlay.lines-overlay { background: rgba(0, 0, 0, .45); }
 .slide-video-overlay.liquid-overlay {
   background: rgba(4, 7, 12, .70);
